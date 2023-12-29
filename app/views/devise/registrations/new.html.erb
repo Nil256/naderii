@@ -1,42 +1,51 @@
 <main>
   <div class="container">
     <div class="row">
-      <div class="col-8 mx-auto">
-        <h2>Sign up</h2>
+      <div class="col-6 mx-auto">
+        <h2>サインアップ</h2>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= form_with model: @user, url: user_registration_path, id: "new_user", class: "new_user", local: true do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
 
-          <div class="field">
-            <%= f.label :username %><br />
-            <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
           </div>
 
-          <div class="field">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autocomplete: "email" %>
+          <div class="form-group">
+            <%= f.label :username, "ユーザーネーム" %>
+            <%= f.text_field :username, autocomplete: "username", class: "form-control" %>
+            <p class="text-muted mb-0">
+              <small>※ ユーザーを識別するための名前です。以下の条件を満たす必要があります。</small>
+            </p>
+            <ul class="pl-4 text-muted">
+              <li><small>他のユーザーネームと被っていないこと</small></li>
+              <li><small>英数字とアンダーバーだけ使うこと</small></li>
+              <li><small>空白は使えない</small></li>
+              <li><small>4文字以上20文字まで</small></li>
+            </ul>
           </div>
 
-          <div class="field">
-            <%= f.label :display_name %><br />
-            <%= f.text_field :display_name, autofocus: true, autocomplete: "name" %>
+          <div class="form-group">
+            <%= f.label :display_name, "表示名" %>
+            <%= f.text_field :display_name, autofocus: true, autocomplete: "name", class: "form-control" %>
           </div>
 
-          <div class="field">
-            <%= f.label :password %>
+          <div class="form-group">
+            <%= f.label :password, "パスワード" %>
             <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <small>(最低<%= @minimum_password_length %>文字必要)</small>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
           </div>
 
-          <div class="field">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <div class="form-group">
+            <%= f.label :password_confirmation, "パスワード(確認)" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
           </div>
 
-          <div class="actions">
-            <%= f.submit "Sign up" %>
+          <div class="form-group">
+            <%= f.submit "サインアップ", class: "btn btn-primary" %>
           </div>
         <% end %>
 
