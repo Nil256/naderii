@@ -1,10 +1,16 @@
 <main>
   <div class="container">
     <div class="row">
-      <div class="col-8 mx-auto text-center">
+      <div class="col-8 pt-3 mx-auto text-center">
         <h1>なでりー</h1>
         <p>「いいね」の代わりに「なでる」SNS</p>
         <p>すごいことはなでて褒めて、悲しいことはなでて慰める<br>そんな感じです</p>
+        <p class="mt-2">
+          <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-primary" %>
+        </p>
+        <p>
+          <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+        </p>
       </div>
     </div>
   </div>
