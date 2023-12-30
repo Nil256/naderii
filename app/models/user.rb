@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, length: { in: 4..20 }, format: {
     with: /\A[a-z0-9_]+\z/i,
-    message: 'は英数字またはアンダーバー(_)のみが使用可能です。'
+    message: "は英数字またはアンダーバー(_)のみが使用可能です。"
   }
   validates :display_name, length: { in: 1..50 }
-  validates :introduction, length: { in: 0..100 }
+  validates :introduction, length: { maximum: 100 }
 end
