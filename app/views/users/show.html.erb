@@ -2,10 +2,25 @@
   <div class="container">
     <div class="row">
       <div class="col-8 mx-auto">
+        <% if flash[:success] %>
+          <p class="alert alert-danger"><%= flash[:success] %></p>
+        <% end %>
+        <% if flash[:danger] %>
+          <p class="alert alert-danger"><%= flash[:danger] %></p>
+        <% end %>
+      </div>
+      <div class="col-8 mx-auto">
         <h1>ユーザーページ</h1>
         <p><b>ユーザーネーム: </b>@<%= @user.username %></p>
         <p><b>表示名:</b> <%= @user.display_name %></p>
         <p><b>自己紹介:</b> <%= @user.introduction %></p>
+
+        <div>
+          <%= link_to "プロフィールの編集", edit_user_path, class: "btn btn-primary" %>
+        </div>
+        <div>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+        </div>
       </div>
     </div>
   </div>
