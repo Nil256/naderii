@@ -32,7 +32,7 @@
               <li>フォロー、フォロワー、なでる など</li>
             </ul>
           </div>
-          <%= form_with model: @user, url: "/users/@#{@user.username}/danger", class: "mb-5", local: true do |f| %>
+          <%= form_with model: @user, url: dangerupdate_user_path(@user.username), class: "mb-5", local: true do |f| %>
             <div class="form-group">
               <%= f.label :username, "ユーザーネーム" %>
               <%= f.text_field :username, class: "form-control" %>

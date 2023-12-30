@@ -6,25 +6,30 @@ class UsersController < ApplicationController
   def edit
     @user = User.find_by!(username: params["username"])
     if !(user_signed_in?) || current_user.id != @user.id
-      redirect_to user_path(@user.username), danger: "他のユーザーのプロフィールは編集できません。"
+      flash[:danger] = "他のユーザーのプロフィールは編集できません。"
+      redirect_to user_path(@user.username)
     end
   end
 
   def dangeredit
     @user = User.find_by!(username: params["username"])
     if !(user_signed_in?) || current_user.id != @user.id
-      redirect_to user_path(@user.username), danger: "他のユーザーのプロフィールは編集できません。"
+      flash[:danger] = "他のユーザーのプロフィールは編集できません。"
+      redirect_to user_path(@user.username)
     end
   end
 
   def update
     @user = User.find_by!(username: params["username"])
     if !(user_signed_in?) || current_user.id != @user.id
-      redirect_to user_path(@user.username), danger: "他のユーザーのプロフィールは編集できません。"
+      flash[:danger] = "他のユーザーのプロフィールは編集できません。"
+      redirect_to user_path(@user.username)
     end
     if @user.update(user_params)
-      redirect_to user_path(@user.username), success: "プロフィールを更新しました。"
+      flash[:success] = "プロフィールを更新しました。"
+      redirect_to user_path(@user.username)
     else
+      # flash.now[:danger] = "プロフィールを更新に失敗しました。"
       render :edit
     end
   end
@@ -32,12 +37,15 @@ class UsersController < ApplicationController
   def dangerupdate
     @user = User.find_by!(username: params["username"])
     if !(user_signed_in?) || current_user.id != @user.id
-      redirect_to user_path(@user.username), danger: "他のユーザーのプロフィールは編集できません。"
+      flash[:danger] = "他のユーザーのプロフィールは編集できません。"
+      redirect_to user_path(@user.username)
     end
     if @user.update(user_params_danger)
-      redirect_to user_path(@user.username), success: "プロフィールを更新しました。"
+      flash[:success] = "プロフィールを更新しました。"
+      redirect_to user_path(@user.username)
     else
-      render :edit
+      # flash.now[:danger] = "プロフィールを更新に失敗しました。"
+      render :dangeredit
     end
   end
 
