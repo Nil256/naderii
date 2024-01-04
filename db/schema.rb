@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_29_060119) do
+ActiveRecord::Schema.define(version: 2024_01_04_014703) do
+
+  create_table "timelines", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "timelinename", null: false
+    t.string "display_name", null: false
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["timelinename"], name: "index_timelines_on_timelinename", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

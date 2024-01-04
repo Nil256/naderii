@@ -12,4 +12,6 @@ class User < ApplicationRecord
   }
   validates :display_name, length: { in: 1..50 }
   validates :introduction, length: { maximum: 100 }
+
+  has_many :timelines
 end
