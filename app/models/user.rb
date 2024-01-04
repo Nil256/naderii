@@ -1,3 +1,5 @@
+# ユーザー
+# ユーザーのこと。
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -11,7 +13,8 @@ class User < ApplicationRecord
     message: "は英数字またはアンダーバー(_)のみが使用可能です。"
   }
   validates :display_name, length: { in: 1..50 }
-  validates :introduction, length: { maximum: 100 }
+  validates :introduction, length: { maximum: 250 }
 
   has_many :timelines
+  has_many :cries
 end

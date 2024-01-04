@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_04_014703) do
+ActiveRecord::Schema.define(version: 2024_01_04_020650) do
+
+  create_table "cries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "timeline_id", null: false
+    t.text "body", null: false
+    t.boolean "is_personal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "timelines", force: :cascade do |t|
     t.integer "user_id", null: false
