@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'homes#top'
+  root to: "homes#top"
+
+  get "/home" => "homes#main", as: "home"
 
   get "/users/@:username/edit/dangerzone" => "users#dangeredit", as: "dangeredit_user"
   get "/users/@:username/edit" => "users#edit", as: "edit_user"
@@ -10,4 +12,9 @@ Rails.application.routes.draw do
   put "/users/@:username/danger" => "users#dangerupdate"
   patch "/users/@:username" => "users#update", as: "update_user"
   put "/users/@:username" => "users#update"
+
+  get 'timelines/search'
+  get 'timelines/show'
+  get 'timelines/edit'
+  resources :timelines, only: [:index, :new, :create]
 end

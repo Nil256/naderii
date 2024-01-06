@@ -1,0 +1,67 @@
+<div class="col-3 nbs-css-sidebaruser">
+  <div class="d-flex flex-column">
+    <!-- -->
+    <div class="d-flex">
+      <div class="align-self-center">
+        <% if user_signed_in? %>
+          <%= attachment_image_tag current_user, :profile_image, :fill, 75, 75, format: "png", fallback: "user_profile_default.png", class: "rounded-circle" %>
+        <% else %>
+          <%= image_tag("logout_user_profile.png", size: "75x75", class: "rounded-circle") %>
+        <% end %>
+      </div>
+      <div class="ml-2 align-self-center">
+        <% if user_signed_in? %>
+          <p class="mb-1"><%= current_user.display_name %></p>
+          <p class="mb-0 text-black-50"><small>@<%= current_user.username %></small></p>
+        <% else %>
+          <p class="mb-0">ログインしてないよ</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="mt-3">
+      <ul class="nav flex-column">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to user_path(current_user.username), class: "nav-link" do %>
+              <i class="fas fa-user fa-lg fa-fw"></i> プロフィール
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to edit_user_path(current_user.username), class: "nav-link" do %>
+              <i class="fas fa-user-cog fa-lg fa-fw"></i> プロフィール編集
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- ログイン/ログアウトなどのリンク -->
+    <div class="position-absolute nbs-css-sidebaruser-danger-links">
+      <ul class="nav flex-column">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <!--
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-danger" do %>
+              <i class="fas fa-sign-out-alt fa-lg fa-fw"></i> ログアウト
+            <% end %>
+            -->
+            <a href="#" class="nav-link text-danger" data-toggle="modal" data-target="#logoutmodal">
+              <i class="fas fa-sign-out-alt fa-lg fa-fw"></i> ログアウト
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to new_user_registration_path, class: "nav-link" do %>
+              <i class="fas fa-user-plus fa-lg fa-fw"></i> サインアップ
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_user_session_path, class: "nav-link" do %>
+              <i class="fas fa-sign-in-alt fa-lg fa-fw"></i> ログイン
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
