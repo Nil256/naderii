@@ -23,30 +23,45 @@ $info: #00afff;
 
 .nbs-css-flexcard {
   width: 32%;
-  margin-right: 1%;
-  margin-bottom: 1%;
+  margin-right: 2%;
+  margin-bottom: 2%;
 }
 
 .nbs-css-flexcard:nth-child(3n) {
   margin-right: 0;
 }
 
-.nbs-css-sidebarnav {
+.nbs-css-navcontainer {
   position: fixed;
-  top: 3em;
-  left: 2em;
-  height: calc(100vh - 3em);
+  top: 0;
+  left: 0;
+}
+
+.nbs-css-sidebarnav {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  // position: fixed;
+  // left: 1.5em;
+  // top: 3em;
+  // left: 2em;
+  // height: calc(100vh - 3em);
 }
 
 .nbs-css-sidebaruser {
-  position: fixed;
-  top: 3em;
-  right: 2em;
-  height: calc(100vh - 3em);
+  top: 0;
+  right: 0;
+  height: 100vh;
+  // position: fixed;
+  // top: 3em;
+  // right: 2em;
+  // height: calc(100vh - 3em);
 }
 
 .nbs-css-sidebaruser-danger-links {
-  right: 2em;
-  bottom: 2em;
+  right: 0;
+  bottom: 1em;
   left: 0;
+  // right: 2em;
+  // bottom: 2em;
 }

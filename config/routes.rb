@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   patch "/users/@:username" => "users#update", as: "update_user"
   put "/users/@:username" => "users#update"
 
-  get 'timelines/search'
-  get 'timelines/show'
-  get 'timelines/edit'
+  # get 'timelines/search'
+  get "/timelines/@:timelinename/edit" => "timelines#edit", as: "edit_timeline"
+  get "/timelines/@:timelinename" => "timelines#show", as: "timeline"
+  patch "/timelines/@:timelinename" => "timelines#update", as: "update_timeline"
+  put "/timelines/@:timelinename" => "timelines#update"
   resources :timelines, only: [:index, :new, :create]
 end

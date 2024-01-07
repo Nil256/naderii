@@ -1,29 +1,26 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-7">
-        <h1>タイムライン</h1>
-        <div class="d-flex flex-wrap">
-          <% @timelines.each do |tl| %>
-            <div class="card nbs-css-flexcard">
-              <div class="card-body">
-                <div class="d-flex">
-                  <div class="align-self-center">
-                    <p class="card-title mb-0 h5"><b><%= tl.display_name %></b></p>
-                    <p class="mb-0 text-black-50">@<%= tl.timelinename %></p>
-                  </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7">
+      <h1>タイムライン</h1>
+      <div class="d-flex flex-wrap">
+        <% @timelines.each do |tl| %>
+          <div class="card nbs-css-flexcard">
+            <div class="card-body">
+              <div class="d-flex">
+                <div class="align-self-center">
+                  <p class="card-title mb-0 h5"><b><%= tl.display_name %></b></p>
+                  <%= link_to timeline_path(tl.timelinename), class: "mb-0 text-black-50 stretched-link" do %>
+                    @<%= tl.timelinename %>
+                  <% end %>
                 </div>
-                <p class="card-text"><%= tl.introduction %></p>
               </div>
+              <p class="card-text"><%= tl.introduction %></p>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
-      <div class="col-3"></div>
-      <%= render "layouts/sidebarnav" %>
-      <%= render "layouts/sidebaruser" %>
     </div>
+    <div class="col-3"></div>
   </div>
-  <%= render "layouts/modallogout" %>
-</main>
+</div>

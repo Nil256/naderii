@@ -10,6 +10,17 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+    <nav>
+      <div class="container-fluid nbs-css-navcontainer">
+        <div class="row position-relative">
+          <%= render "layouts/sidebarnav" %>
+          <%= render "layouts/sidebaruser" %>
+        </div>
+      </div>
+      <%= render "layouts/modallogout" %>
+    </nav>
   </body>
 </html>
