@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     if !(user_signed_in?) || current_user.id != @user.id
       flash[:danger] = "他のユーザーのプロフィールは編集できません。"
       redirect_to user_path(@user.username)
+      return
     end
     if @user.update(user_params)
       flash[:success] = "プロフィールを更新しました。"
@@ -39,9 +40,10 @@ class UsersController < ApplicationController
     if !(user_signed_in?) || current_user.id != @user.id
       flash[:danger] = "他のユーザーのプロフィールは編集できません。"
       redirect_to user_path(@user.username)
+      return
     end
     if @user.update(user_params_danger)
-      flash[:success] = "プロフィールを更新しました。"
+      flash[:success] = "ユーザーネームを変更しました。"
       redirect_to user_path(@user.username)
     else
       # flash.now[:danger] = "プロフィールを更新に失敗しました。"

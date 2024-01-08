@@ -14,12 +14,17 @@ class TimelinesController < ApplicationController
   def new
     @timeline = Timeline.new
     @randomname = SecureRandom.alphanumeric(16)
+    if !user_signed_in?
+      flash[:danger] = "タイムラインを作成するにはログインする必要があります。"
+      redirect_to timelines_path
+    end
   end
 
   def create
     if !user_signed_in?
       flash[:danger] = "タイムラインを作成するにはログインする必要があります。"
       redirect_to timelines_path
+      return
     end
     @timeline = current_user.timelines.new(timeline_params_new)
     if @timeline.save
@@ -33,6 +38,10 @@ class TimelinesController < ApplicationController
 
   def edit
     @timeline = Timeline.find_by(timelinename: params[:timelinename])
+    if !user_signed_in? || @timeline.user_id != current_user.id
+      flash[:danger] = "タイムラインの編集はそのタイムラインの管理者でないとできません"
+      redirect_to timeline_path(@timeline.timelinename)
+    end
   end
 
   def update
@@ -40,6 +49,7 @@ class TimelinesController < ApplicationController
     if !user_signed_in? || @timeline.user_id != current_user.id
       flash[:danger] = "タイムラインの編集はそのタイムラインの管理者でないとできません"
       redirect_to timeline_path(@timeline.timelinename)
+      return
     end
     if @timeline.update(timeline_params)
       redirect_to timeline_path(@timeline.timelinename)
