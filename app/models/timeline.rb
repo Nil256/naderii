@@ -12,5 +12,5 @@ class Timeline < ApplicationRecord
   validates :introduction, length: { maximum: 250 }
 
   belongs_to :user
-  has_many :cries
+  has_many :cries, dependent: :destroy
 end
