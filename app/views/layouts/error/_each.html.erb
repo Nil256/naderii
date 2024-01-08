@@ -1,0 +1,10 @@
+<% errors = model.errors.full_messages_for(symbol) %>
+<% if errors.count > 0 %>
+  <div class="alert alert-danger">
+    <ul>
+      <% errors.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

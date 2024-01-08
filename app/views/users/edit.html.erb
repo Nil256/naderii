@@ -5,17 +5,20 @@
       <%= render "layouts/header/edit", hl: "プロフィール編集", id: @user.username, link: user_path(@user.username) %>
       <%= form_with model: @user, url: update_user_path(@user.username), local: true do |f| %>
         <div class="form-group">
-          <label><b>アイコン</b></label>
+          <%= f.label :profile_image %>
+          <%= render "layouts/error/each", model: @user, symbol: :profile_image %>
           <%= f.attachment_field :profile_image, class: "form-control-file" %>
         </div>
 
         <div class="form-group">
-          <label><b>表示名</b></label>
+          <%= f.label :display_name %>
+          <%= render "layouts/error/each", model: @user, symbol: :display_name %>
           <%= f.text_field :display_name, class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <label><b>自己紹介</b></label>
+          <%= f.label :introduction %>
+          <%= render "layouts/error/each", model: @user, symbol: :introduction %>
           <%= f.text_area :introduction, rows: 5, class: "form-control" %>
         </div>
 

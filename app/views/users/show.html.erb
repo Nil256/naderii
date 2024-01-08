@@ -4,14 +4,14 @@
     <div class="col-7 mt-3">
       <div class="d-flex sticky-top border-bottom pb-2 mb-3">
         <div class="align-self-center">
-          <%= attachment_image_tag @user, :profile_image, 100, 100, :fill, format: "png", size: "100x100", fallback: "user_profile_default", class: "rounded-circle" %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "png", size: "100x100", fallback: "user_profile_default", class: "rounded-circle" %>
         </div>
         <div class="ml-2 align-self-center">
           <p class="mb-0 h5"><b><%= @user.display_name %></b></p>
           <p class="mb-0 text-black-50"><small>@<%= @user.username %></small></p>
         </div>
         <% if user_signed_in? && @user.id == current_user.id %>
-        <div class="align-self-center ml-auto">
+        <div class="align-self-center ml-auto mr-2">
           <%= link_to edit_user_path(@user.username), class: "text-secondary", "title" => "編集する" do %>
             <i class="fas fa-pen fa-lg"></i>
           <% end %>

@@ -6,10 +6,12 @@
       <%= form_with model: @timeline, url: update_timeline_path(@timeline.timelinename), local: true do |f| %>
         <div class="form-group">
           <%= f.label :display_name, "表示名" %>
+          <%= render "layouts/error/each", model: @timeline, symbol: :display_name %>
           <%= f.text_field :display_name, class: "form-control" %>
         </div>
         <div class="form-group">
           <%= f.label :introduction, "概要" %>
+          <%= render "layouts/error/each", model: @timeline, symbol: :introduction %>
           <%= f.text_area :introduction, rows: 10, class: "form-control" %>
         </div>
         <div class="form-group">

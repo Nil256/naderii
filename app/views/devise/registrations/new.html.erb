@@ -5,48 +5,53 @@
       <%= render "layouts/header/common", hl: "アカウント作成" %>
 
       <%= form_with model: @user, url: user_registration_path, id: "new_user", class: "new_user pt-2", local: true do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+        <!-- <%= render "devise/shared/error_messages", resource: resource %> -->
 
         <div class="form-group">
-          <label><b>Email</b></label>
+          <%= f.label :email %>
+          <%= render "layouts/error/each", model: @user, symbol: :email %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <label><b>ユーザーネーム</b></label>
+          <%= f.label :username %>
           <a data-toggle="collapse" href="#username_desc" role="button" aria-expanded="false" aria-controls="username_desc"><i class="far fa-question-circle fa-lg"></i></a>
           <div class="collapse" id="username_desc">
             <div class="alert alert-info">
               ユーザーネームは、ユーザーを識別するための名前です。<br>
               以下の条件を満たす必要があります。
-              <ul class="mb-0 pl-4">
+              <ul>
                 <li>英数字とアンダーバーだけ使うこと (空白も使えません)</li>
                 <li>4文字以上20文字まで</li>
                 <li>他のユーザーネームと被っていないこと</li>
               </ul>
             </div>
           </div>
-          <div class="input-group">
+          <%= render "layouts/error/each", model: @user, symbol: :username %>
+          <div class="input-group flex-nowrap">
             <div class="input-group-prepend"><div class="input-group-text">@</div></div>
             <%= f.text_field :username, autocomplete: "username", class: "form-control" %>
           </div>
         </div>
 
         <div class="form-group">
-          <label><b>表示名</b></label>
+          <%= f.label :display_name %>
+          <%= render "layouts/error/each", model: @user, symbol: :display_name %>
           <%= f.text_field :display_name, autofocus: true, autocomplete: "name", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <label><b>パスワード</b></label>
+          <%= f.label :password %>
           <% if @minimum_password_length %>
           <small>(最低<%= @minimum_password_length %>文字必要)</small>
-          <% end %><br />
+          <% end %>
+          <%= render "layouts/error/each", model: @user, symbol: :password %>
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <label><b>パスワード</b> (確認)</label>
+          <%= f.label :password_confirmation %>
+          <%= render "layouts/error/each", model: @user, symbol: :password_confirmation %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
         </div>
 

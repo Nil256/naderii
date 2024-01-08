@@ -22,6 +22,21 @@ $info: #00afff;
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+
+label {
+  font-weight: bold;
+}
+
+.field_with_errors {
+  display: contents;
+}
+
+.alert > ul {
+  margin-bottom: 0;
+  padding-inline-start: 1.5em;
+}
+
+
 .nbs-css-flexcard {
   width: 49%;
   margin-right: 2%;
@@ -41,7 +56,7 @@ $info: #00afff;
 .nbs-css-sidebarnav {
   top: 0;
   left: 0;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #fffcff;
   border-right: 1px solid #fee2fe;
   // position: fixed;
@@ -54,7 +69,7 @@ $info: #00afff;
 .nbs-css-sidebaruser {
   top: 0;
   right: 0;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #fffdfb;
   border-left: 1px solid #fee5e1;
   // position: fixed;

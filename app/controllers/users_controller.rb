@@ -13,6 +13,8 @@ class UsersController < ApplicationController
 
   def dangeredit
     @user = User.find_by!(username: params["username"])
+    @correct_username = @user.username
+    @opened_username = "false"
     if !(user_signed_in?) || current_user.id != @user.id
       flash[:danger] = "他のユーザーのプロフィールは編集できません。"
       redirect_to user_path(@user.username)
@@ -30,13 +32,13 @@ class UsersController < ApplicationController
       flash[:success] = "プロフィールを更新しました。"
       redirect_to user_path(@user.username)
     else
-      # flash.now[:danger] = "プロフィールを更新に失敗しました。"
       render :edit
     end
   end
 
   def dangerupdate
     @user = User.find_by!(username: params["username"])
+    @correct_username = @user.username
     if !(user_signed_in?) || current_user.id != @user.id
       flash[:danger] = "他のユーザーのプロフィールは編集できません。"
       redirect_to user_path(@user.username)
@@ -46,7 +48,7 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザーネームを変更しました。"
       redirect_to user_path(@user.username)
     else
-      # flash.now[:danger] = "プロフィールを更新に失敗しました。"
+      @opened_username = "true"
       render :dangeredit
     end
   end

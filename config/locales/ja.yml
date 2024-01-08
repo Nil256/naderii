@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        username: ユーザーネーム
+        display_name: 表示名
+        profile_image: アイコン
+        profile_image_id: アイコン
+        introduction: 自己紹介
+      timeline:
+        timelinename: タイムラインネーム
+        display_name: 表示名
+        introduction: 概要
+      cry:
+        body: 本文
