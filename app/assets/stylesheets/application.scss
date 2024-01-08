@@ -14,6 +14,7 @@
  *= require_self
  */
 
+$primary: #fc3cfc;
 // $primary: #ffafff;
 $info: #00afff;
 
@@ -22,12 +23,12 @@ $info: #00afff;
 @import 'font-awesome';
 
 .nbs-css-flexcard {
-  width: 32%;
+  width: 49%;
   margin-right: 2%;
   margin-bottom: 2%;
 }
 
-.nbs-css-flexcard:nth-child(3n) {
+.nbs-css-flexcard:nth-child(2n) {
   margin-right: 0;
 }
 
@@ -41,6 +42,8 @@ $info: #00afff;
   top: 0;
   left: 0;
   height: 100vh;
+  background-color: #fffcff;
+  border-right: 1px solid #fee2fe;
   // position: fixed;
   // left: 1.5em;
   // top: 3em;
@@ -51,7 +54,9 @@ $info: #00afff;
 .nbs-css-sidebaruser {
   top: 0;
   right: 0;
-  height: 100vh;
+  min-height: 100vh;
+  background-color: #fffdfb;
+  border-left: 1px solid #fee5e1;
   // position: fixed;
   // top: 3em;
   // right: 2em;

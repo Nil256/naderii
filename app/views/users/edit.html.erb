@@ -1,34 +1,35 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-8 mx-auto">
-        <h1>プロフィールの編集</h1>
-        <%= form_with model: @user, url: update_user_path(@user.username), local: true do |f| %>
-          <div class="form-group">
-            <%= f.label :profile_image, "アイコン" %>
-            <%= f.attachment_field :profile_image, class: "form-control-file" %>
-          </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7 mt-3">
+      <%= render "layouts/header/edit", hl: "プロフィール編集", id: @user.username, link: user_path(@user.username) %>
+      <%= form_with model: @user, url: update_user_path(@user.username), local: true do |f| %>
+        <div class="form-group">
+          <label><b>アイコン</b></label>
+          <%= f.attachment_field :profile_image, class: "form-control-file" %>
+        </div>
 
-          <div class="form-group">
-            <%= f.label :display_name, "表示名" %>
-            <%= f.text_field :display_name, class: "form-control" %>
-          </div>
+        <div class="form-group">
+          <label><b>表示名</b></label>
+          <%= f.text_field :display_name, class: "form-control" %>
+        </div>
 
-          <div class="form-group">
-            <%= f.label :introduction, "自己紹介文" %>
-            <%= f.text_area :introduction, rows: 5, class: "form-control" %>
-          </div>
+        <div class="form-group">
+          <label><b>自己紹介</b></label>
+          <%= f.text_area :introduction, rows: 5, class: "form-control" %>
+        </div>
 
-          <div class="form-group">
-            <%= f.submit "更新", class: "btn btn-primary" %>
-          </div>
+        <div class="form-group">
+          <%= link_to "やっぱやめる", user_path(@user.username), class: "btn btn-secondary" %>
+          <%= f.submit "これにする", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <div class="mt-5">
+        <%= link_to dangeredit_user_path, class: "text-danger" do %>
+          <small>危険性のある設定を開く</small>
         <% end %>
-        <div class="mt-5">
-          <%= link_to dangeredit_user_path, class: "text-danger" do %>
-            <small>危険性のある設定を開く</small>
-          <% end %>
-          </div>
       </div>
     </div>
+    <div class="col-3"></div>
   </div>
-</main>
+</div>

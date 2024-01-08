@@ -1,73 +1,72 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-8 mx-auto">
-        <h1>ユーザー設定</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7 mt-3">
+      <%= render "layouts/header/withID", hl: "ユーザー設定", id: @user.username %>
+      <p class="alert alert-danger mb-4">
+        以下の設定は危険性を伴う設定(破壊的な設定)があります。<br>
+        危険性を理解した上で変更を行ってください。
+      </p>
 
-        <p class="alert alert-danger my-4">
-          以下の設定は危険性を伴う設定があります。<br>
-          危険性を理解したう上で変更を行ってください。
-        </p>
-
-        <div class="mb-3">
-          <button class="btn btn-outline-warning" type="button" data-toggle="collapse" data-target="#usernameedit" aria-controls="usernameedit" aria-expanded="false">
-            ユーザーネームの変更
-          </button>
+      <div class="pl-1 mb-3">
+        <button class="btn btn-outline-warning" type="button" data-toggle="collapse" data-target="#usernameedit" aria-controls="usernameedit" aria-expanded="false">
+          ユーザーネームの変更
+        </button>
+      </div>
+      <div class="collapse" id="usernameedit">
+        <h3>ユーザーネームの変更</h3>
+        <div class="alert alert-warning mb-1">
+          ユーザーネームは、各ユーザーを識別するための名前です。<br>
+          ユーザーネームを変更すると、次のようなことが起こるかもしれません。
+          <ul class="mb-0">
+            <li>他のユーザーに変更前のユーザーネームが使われるかも。<br>(そうなったら戻せなくなるよ。)</li>
+            <li>あなたをフォローしてないユーザーがあなたを探しづらくなるかも。</li>
+            <li>前にどこかに張ったあなたのプロフィールページに遷移するURLが機能しなくなるか、<br>別の人にものに遷移するようになるかも。</li>
+          </ul>
         </div>
-        <div class="collapse" id="usernameedit">
-          <h3>ユーザーネームの変更</h3>
-          <div class="alert alert-warning mb-1">
-            ユーザーネームは、各ユーザーを識別するための名前です。<br>
-            ユーザーネームを変更すると、次のようなことが起こるかもしれません。
-            <ul class="mb-0">
-              <li>他のユーザーに変更前のユーザーネームが使われるかも。<br>(そうなったら戻せなくなるよ。)</li>
-              <li>あなたをフォローしてないユーザーがあなたを探しづらくなるかも。</li>
-              <li>前にどこかに張ったあなたのプロフィールページに遷移するURLが機能しなくなるか、<br>別の人にものに遷移するようになるかも。</li>
-            </ul>
-          </div>
-          <div class="alert alert-info">
-            ユーザーネームを変更しても以下は変化しないよ。
-            <ul class="mb-0">
-              <li>作成したタイムライン、投稿</li>
-              <li>フォロー、フォロワー、なでる など</li>
-            </ul>
-          </div>
-          <%= form_with model: @user, url: dangerupdate_user_path(@user.username), class: "mb-5", local: true do |f| %>
-            <div class="form-group">
-              <%= f.label :username, "ユーザーネーム" %>
-              <%= f.text_field :username, class: "form-control" %>
-            </div>
-
-            <div class="form-group">
-              <%= f.submit "ユーザーネームを変更する", class: "btn btn-warning" %>
-            </div>
-          <% end %>
+        <div class="alert alert-info">
+          ユーザーネームを変更しても以下は変化しないよ。
+          <ul class="mb-0">
+            <li>作成したタイムライン、投稿</li>
+            <li>フォロー、フォロワー、なでる など</li>
+          </ul>
         </div>
-
-        <div class="mb-3">
-          <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#userdelete" aria-controls="userdelete" aria-expanded="false">
-            ユーザーの削除
-          </button>
-        </div>
-        <div class="collapse" id="userdelete">
-          <h3>ユーザーの削除</h3>
-          <div class="alert alert-danger">
-            ユーザーを削除します。<br>
-            ユーザーを削除すると以下のようなデータが<b>永久に</b>削除されます。
-            <ul class="mb-0">
-              <li>作成したタイムライン、投稿</li>
-              <li>フォロー、フォロワー、なでる など</li>
-            </ul>
-            ユーザーの復元はできません。
+        <%= form_with model: @user, url: dangerupdate_user_path(@user.username), class: "mb-5", local: true do |f| %>
+          <div class="form-group">
+            <%= f.label :username, "ユーザーネーム" %>
+            <%= f.text_field :username, class: "form-control" %>
           </div>
 
-          <p class="btn btn-secondary">ユーザーを削除する</p>
+          <div class="form-group">
+            <%= f.submit "ユーザーネームを変更する", class: "btn btn-warning" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="pl-1 mb-3">
+        <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#userdelete" aria-controls="userdelete" aria-expanded="false">
+          ユーザーの削除
+        </button>
+      </div>
+      <div class="collapse" id="userdelete">
+        <h3>ユーザーの削除</h3>
+        <div class="alert alert-danger">
+          ユーザーを削除します。<br>
+          ユーザーを削除すると以下のようなデータが<b>永久に</b>削除されます。
+          <ul class="mb-0">
+            <li>作成したタイムライン、投稿</li>
+            <li>フォロー、フォロワー、なでる など</li>
+          </ul>
+          ユーザーの復元はできません。
         </div>
 
-        <div class="mt-5">
-          <%= link_to "プロフィール編集に戻る", edit_user_path(current_user.username), class: "btn btn-success" %>
-        </div>
+        <p class="btn btn-secondary">ユーザーを削除する</p>
+      </div>
+
+      <div class="mt-5">
+        <%= link_to "プロフィール編集に戻る", edit_user_path(current_user.username), class: "btn btn-success" %>
       </div>
     </div>
+    <div class="col-3"></div>
   </div>
-</main>
+</div>

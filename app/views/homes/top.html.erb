@@ -6,10 +6,17 @@
         <p>「いいね」の代わりに「なでる」SNS</p>
         <p>すごいことはなでて褒めて、悲しいことはなでて慰める<br>そんな感じです</p>
         <p class="mt-2">
-          <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-primary" %>
+          <%= link_to "アカウントを作る", new_user_registration_path, class: "btn btn-primary" %>
         </p>
         <p>
-          <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+          <%= link_to "ログインする", new_user_session_path, class: "btn btn-primary" %>
+        </p>
+
+        <p class="mt-2 mb-0 text-black-50">
+          <small>その前に...</small>
+        </p>
+        <p>
+          <%= link_to "ちょっと覗いてみる", timelines_path, class: "btn btn-primary" %>
         </p>
       </div>
     </div>

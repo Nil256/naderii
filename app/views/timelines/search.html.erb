@@ -1,2 +1,26 @@
-<h1>Timelines#search</h1>
-<p>Find me in app/views/timelines/search.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7 mt-3">
+      <%= render 'layouts/header/common', hl: "タイムライン一覧" %>
+      <div class="d-flex flex-wrap">
+        <% @timelines.each do |tl| %>
+          <div class="card nbs-css-flexcard">
+            <div class="card-body">
+              <div class="d-flex">
+                <div class="align-self-center">
+                  <p class="card-title mb-0 h5"><b><%= tl.display_name %></b></p>
+                  <%= link_to timeline_path(tl.timelinename), class: "mb-0 text-black-50 stretched-link" do %>
+                    @<%= tl.timelinename %>
+                  <% end %>
+                </div>
+              </div>
+              <p class="card-text"><%= advanced_truncated(tl.introduction, 40, 4) %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>

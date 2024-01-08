@@ -1,15 +1,30 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-2"></div>
-    <div class="col-7">
-      <h1>タイムラインを作成する</h1>
+    <div class="col-7 mt-3">
+      <%= render 'layouts/header/common', hl: "タイムラインを作成する" %>
       <%= form_with model: @timeline, local: true do |f| %>
         <div class="form-group">
-          <%= f.label :timelinename, "タイムラインネーム" %>
-          <%= f.text_field :timelinename, class: "form-control" %>
+          <label><b>タイムラインネーム</b></label>
+          <a data-toggle="collapse" href="#timelinename_desc" role="button" aria-expanded="false" aria-controls="timelinename_desc"><i class="far fa-question-circle fa-lg"></i></a>
+          <div class="collapse" id="timelinename_desc">
+            <div class="alert alert-info">
+              タイムラインネームは、ユーザーネームと同じようにタイムラインを識別するための名前です。<br>
+              以下の条件を満たす必要があります。
+              <ul class="mb-0 pl-4">
+                <li>英数字とアンダーバーだけ使うこと (空白も使えません)</li>
+                <li>4文字以上20文字まで</li>
+                <li>他のタイムラインネームと被っていないこと</li>
+              </ul>
+            </div>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend"><div class="input-group-text">@</div></div>
+            <%= f.text_field :timelinename, autofocus: true, autocomplete: "timelinename", class: "form-control" %>
+          </div>
         </div>
         <div class="form-group">
-          <%= f.label :display_name, "表示名" %>
+          <label><b>表示名</b></label>
           <%= f.text_field :display_name, class: "form-control" %>
         </div>
         <div class="form-group">

@@ -2,17 +2,7 @@
   <div class="row">
     <div class="col-2"></div>
     <div class="col-7 mt-3">
-      <div class="d-flex sticky-top border-bottom pb-2 mb-2">
-        <div class="align-self-center">
-          <p class="mb-0 h5"><b><%= @timeline.display_name %></b></p>
-          <p class="mb-0 text-black-50"><small>@<%= @timeline.timelinename %></small></p>
-        </div>
-        <div class="align-self-center ml-auto">
-          <%= link_to timeline_path(@timeline.timelinename), class: "text-secondary", "title" => "戻る" do %>
-            <i class="fas fa-reply fa-lg"></i>
-          <% end %>
-        </div>
-      </div>
+      <%= render "layouts/header/edit", hl: "タイムライン編集", id: @timeline.timelinename, link: timeline_path(@timeline.timelinename) %>
       <%= form_with model: @timeline, url: update_timeline_path(@timeline.timelinename), local: true do |f| %>
         <div class="form-group">
           <%= f.label :display_name, "表示名" %>
@@ -23,7 +13,8 @@
           <%= f.text_area :introduction, rows: 10, class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.submit "更新する", class: "btn btn-primary" %>
+          <%= link_to "やっぱやめる", timeline_path(@timeline.timelinename), class: "btn btn-secondary" %>
+          <%= f.submit "これにする", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>

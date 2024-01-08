@@ -1,27 +1,27 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-8 mx-auto">
-        <% if flash[:success] %>
-          <p class="alert alert-success"><%= flash[:success] %></p>
-        <% end %>
-        <% if flash[:danger] %>
-          <p class="alert alert-danger"><%= flash[:danger] %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7 mt-3">
+      <div class="d-flex sticky-top border-bottom pb-2 mb-3">
+        <div class="align-self-center">
+          <%= attachment_image_tag @user, :profile_image, 100, 100, :fill, format: "png", size: "100x100", fallback: "user_profile_default", class: "rounded-circle" %>
+        </div>
+        <div class="ml-2 align-self-center">
+          <p class="mb-0 h5"><b><%= @user.display_name %></b></p>
+          <p class="mb-0 text-black-50"><small>@<%= @user.username %></small></p>
+        </div>
+        <% if user_signed_in? && @user.id == current_user.id %>
+        <div class="align-self-center ml-auto">
+          <%= link_to edit_user_path(@user.username), class: "text-secondary", "title" => "編集する" do %>
+            <i class="fas fa-pen fa-lg"></i>
+          <% end %>
+        </div>
         <% end %>
       </div>
-      <div class="col-8 mx-auto">
-        <h1>ユーザーページ</h1>
-        <p><b>ユーザーネーム: </b>@<%= @user.username %></p>
-        <p><b>表示名:</b> <%= @user.display_name %></p>
-        <p><b>自己紹介:</b> <%= @user.introduction %></p>
-
-        <div>
-          <%= link_to "プロフィールの編集", edit_user_path, class: "btn btn-primary" %>
-        </div>
-        <div>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
-        </div>
+      <div class="border-bottom">
+        <p><%= show_raw_text(@user.introduction) %></p>
       </div>
     </div>
+    <div class="col-3"></div>
   </div>
-</main>
+</div>

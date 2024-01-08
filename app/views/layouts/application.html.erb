@@ -13,14 +13,20 @@
     <main>
       <%= yield %>
     </main>
+    <% if controller_name != "homes" || action_name == "main" %>
     <nav>
       <div class="container-fluid nbs-css-navcontainer">
         <div class="row position-relative">
-          <%= render "layouts/sidebarnav" %>
-          <%= render "layouts/sidebaruser" %>
+          <% if user_signed_in? %>
+            <%= render "layouts/sidebar-nav-login" %>
+          <% else %>
+            <%= render "layouts/sidebar-nav-logout" %>
+          <% end %>
+          <%= render "layouts/sidebar-userinfo" %>
         </div>
       </div>
       <%= render "layouts/modallogout" %>
     </nav>
+    <% end %>
   </body>
 </html>

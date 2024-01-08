@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-2"></div>
     <div class="col-7 mt-3">
-      <div class="d-flex sticky-top border-bottom pb-2 mb-2">
+      <div class="d-flex sticky-top border-bottom pb-2 mb-3">
         <div class="align-self-center">
           <p class="mb-0 h5"><b><%= @timeline.display_name %></b></p>
           <p class="mb-0 text-black-50"><small>@<%= @timeline.timelinename %></small></p>
@@ -15,8 +15,8 @@
         </div>
         <% end %>
       </div>
-      <div>
-        <p><%= @timeline.introduction %></p>
+      <div class="border-bottom">
+        <p><%= show_raw_text(@timeline.introduction) %></p>
       </div>
     </div>
     <div class="col-3"></div>
