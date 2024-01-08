@@ -13,6 +13,7 @@ class TimelinesController < ApplicationController
 
   def new
     @timeline = Timeline.new
+    @randomname = SecureRandom.alphanumeric(16)
   end
 
   def create
@@ -25,6 +26,7 @@ class TimelinesController < ApplicationController
       flash[:success] = "タイムラインを作成しました。"
       redirect_to timeline_path(@timeline.timelinename)
     else
+      @randomname = params[:timeline][:timelinename]
       render :new
     end
   end
