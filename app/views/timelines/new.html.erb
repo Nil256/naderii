@@ -21,13 +21,13 @@
           <%= render "layouts/error/each", model: @timeline, symbol: :timelinename %>
           <div class="input-group flex-nowrap">
             <div class="input-group-prepend"><div class="input-group-text">@</div></div>
-            <%= f.text_field :timelinename, autofocus: true, autocomplete: "timelinename", class: "form-control", "value" => @randomname %>
+            <%= f.text_field :timelinename, autocomplete: "timelinename", class: "form-control", "value" => @randomname %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :display_name %>
           <%= render "layouts/error/each", model: @timeline, symbol: :display_name %>
-          <%= f.text_field :display_name, class: "form-control" %>
+          <%= f.text_field :display_name, autofocus: true, class: "form-control" %>
         </div>
         <div class="form-group">
           <%= link_to "やっぱやめる", timelines_path, class: "btn btn-secondary" %>
