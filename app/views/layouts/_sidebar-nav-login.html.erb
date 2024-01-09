@@ -12,26 +12,26 @@
 
     <!-- タイムライン -->
     <li class="nav-item">
-      <% if action_name != "index" %>
-        <%= link_to timelines_path, class: "nav-link" do %>
-          <i class="fas fa-bezier-curve fa-lg fa-fw"></i> タイムライン
-        <% end %>
-      <% else %>
+      <% if controller_name == "timelines" && action_name == "index" %>
         <span class="nav-link text-muted">
           <i class="fas fa-bezier-curve fa-lg fa-fw"></i> タイムライン
         </span>
+      <% else %>
+        <%= link_to timelines_path, class: "nav-link" do %>
+          <i class="fas fa-bezier-curve fa-lg fa-fw"></i> タイムライン
+        <% end %>
       <% end %>
 
       <ul class="nav flex-column ml-3">
         <li class="nav-item">
-          <% if action_name != "new" && action_name != "create" %>
-            <%= link_to new_timeline_path, class: "nav-link" do %>
-              <i class="fas fa-plus fa-fw"></i> タイムライン作成
-            <% end %>
-          <% else %>
+          <% if controller_name == "timelines" && (action_name == "new" || action_name == "create") %>
             <span class="nav-link text-muted">
               <i class="fas fa-plus fa-fw"></i> タイムライン作成
             </span>
+          <% else %>
+            <%= link_to new_timeline_path, class: "nav-link" do %>
+              <i class="fas fa-plus fa-fw"></i> タイムライン作成
+            <% end %>
           <% end %>
         </li>
       </ul>
