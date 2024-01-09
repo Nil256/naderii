@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       return
     end
     if @user.update(user_params)
-      flash[:success] = "プロフィールを更新しました。"
+      flash[:success] = "プロフィール更新したよ！"
       redirect_to user_path(@user.username)
     else
       render :edit

@@ -2,7 +2,7 @@ class CriesController < ApplicationController
   def publiccreate
     @timeline = Timeline.find_by!(timelinename: params[:timelinename])
     if !(user_signed_in?)
-      flash[:danger] = "投稿するにはログインする必要があります"
+      flash[:danger] = "投稿するにはログインする必要があります。"
       redirect_to timeline_path(@timeline.timelinename)
       return
     end
@@ -19,7 +19,7 @@ class CriesController < ApplicationController
 
   def privatecreate
     if !(user_signed_in?)
-      flash[:danger] = "投稿するにはログインする必要があります"
+      flash[:danger] = "投稿するにはログインする必要があります。"
       redirect_to new_user_session_path
       return
     end
