@@ -23,6 +23,8 @@ $info: #00afff;
 @import 'font-awesome';
 
 
+// デフォルトの上書き
+
 label {
   font-weight: bold;
 }
@@ -37,16 +39,21 @@ label {
 }
 
 
-.nbs-css-resize-none {
+// Bootstrapに足りないCSSで共通で使用できるもの
+
+.nbs-resize-none {
   resize: none;
 }
 
 
-.nbs-css-cursor-grab {
+.nbs-cursor-grab {
   cursor: grab;
 }
 
 
+// ユニークなCSSを持っている部品
+
+// サイドバー
 .nbs-css-navcontainer {
   position: fixed;
   top: 0;
@@ -87,27 +94,33 @@ label {
 }
 
 
-.nbs-css-crycard {
+// cry
+.nad-cries-container {
+  margin-bottom: 15px;
+}
+
+.nad-cry {
   border-left: 1px solid #fccffc;
   border-right: 1px solid #fccffc;
   border-bottom: 1px solid #fccffc;
 }
-.nbs-css-crycard:first-child {
+.nad-cry:first-child {
   border-top: 1px solid #fccffc;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
-.nbs-css-crycard:last-child {
+.nad-cry:last-child {
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
 
-.nbs-css-cryleftmargin {
+.nad-cry-body {
   margin-left: calc(50px + 0.5rem);
   margin-top: 0.5rem;
 }
 
 
+// timeline (index)
 .nbs-css-timelinecard {
   width: 49%;
   margin-right: 2%;
@@ -118,15 +131,15 @@ label {
 }
 
 
-.nbs-css-cryformspace {
-  margin-bottom: 12rem;
+// cry投稿用
+.nad-cryform-space {
+  margin-bottom: 11rem;
 }
 
-.nbs-css-cryform {
+.nad-cryform {
   position: fixed;
   width: inherit;
   max-width: inherit;
   bottom: 0;
   padding-right: 30px;
-  padding-bottom: 0.5rem;
 }

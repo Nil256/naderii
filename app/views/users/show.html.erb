@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-2"></div>
     <div class="col-7 mt-3">
-      <div class="d-flex sticky-top border-bottom pb-2 mb-3">
+      <div class="d-flex sticky-top bg-white pb-2 border-bottom mb-3">
         <div class="align-self-center">
-          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "png", size: "100x100", fallback: "user_profile_default", class: "rounded-circle" %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "png", size: "100x100", fallback: "user_profile_default", class: "rounded-circle nbs-cursor-grab" %>
         </div>
         <div class="ml-2 align-self-center">
           <p class="mb-0 h5"><b><%= @user.display_name %></b></p>
@@ -18,9 +18,12 @@
         </div>
         <% end %>
       </div>
-      <div class="border-bottom">
+
+      <div class="border-bottom mb-3">
         <p><%= show_raw_text(@user.introduction) %></p>
       </div>
+
+      <%= render "layouts/cries", cries: @user.cries.order(created_at: :desc), show_timeline: true %>
     </div>
     <div class="col-3"></div>
   </div>

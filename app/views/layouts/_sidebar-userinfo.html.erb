@@ -14,7 +14,7 @@
     <div class="d-flex">
       <div class="align-self-center">
         <% if user_signed_in? %>
-          <%= attachment_image_tag current_user, :profile_image, :fill, 75, 75, format: "png", size: "75x75", fallback: "user_profile_default.png", class: "rounded-circle" %>
+          <%= attachment_image_tag current_user, :profile_image, :fill, 75, 75, format: "png", size: "75x75", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
         <% else %>
           <%= image_tag("logout_user_profile.png", size: "75x75", class: "rounded-circle") %>
         <% end %>
