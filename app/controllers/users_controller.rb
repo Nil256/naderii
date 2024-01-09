@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find_by!(username: params["username"])
+    @cry = Cry.new
   end
 
   def edit

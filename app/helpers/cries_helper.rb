@@ -1,0 +1,2 @@
+module CriesHelper
+end

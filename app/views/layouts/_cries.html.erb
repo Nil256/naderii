@@ -1,0 +1,24 @@
+<div class="nbs-css-cryformspace">
+  <% cries.each do |cry| %>
+    <div class="nbs-css-crycard p-3">
+      <div class="d-flex">
+        <div>
+          <%= attachment_image_tag cry.user, :profile_image, :fill, 50, 50, format: "png", size: "50x50", fallback: "user_profile_default.png", class: "rounded-circle nbs-css-cursor-grab" %>
+        </div>
+        <div class="ml-2 pt-1">
+          <p class="mb-0">
+            <b><%= advanced_truncated(cry.user.display_name, 50) %></b>
+          </p>
+          <p class="mb-0">
+            <%= link_to user_path(cry.user.username), class: "text-black-50" do %>
+              <small>@<%= cry.user.username %></small>
+            <% end %>
+          </p>
+        </div>
+      </div>
+      <div class="mt-2 nbs-css-cryleftmargin">
+        <%= show_raw_text(cry.body) %>
+      </div>
+    </div>
+  <% end %>
+</div>

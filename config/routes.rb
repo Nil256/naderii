@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   patch "/users/@:username" => "users#update", as: "update_user"
   put "/users/@:username" => "users#update"
 
+  get "/cries/:id" => "cries#show", as: "cry"
+  delete "/cries/:id" => "cries#destroy"
+  post "/cries" => "cries#privatecreate", as: "private_cries"
+  post "/timelines/@:timelinename/cries" => "cries#publiccreate", as: "public_cries"
+
   # get 'timelines/search'
   get "/timelines/@:timelinename/edit" => "timelines#edit", as: "edit_timeline"
   get "/timelines/@:timelinename" => "timelines#show", as: "timeline"

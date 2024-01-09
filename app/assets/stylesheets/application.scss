@@ -37,15 +37,15 @@ label {
 }
 
 
-.nbs-css-flexcard {
-  width: 49%;
-  margin-right: 2%;
-  margin-bottom: 2%;
+.nbs-css-resize-none {
+  resize: none;
 }
 
-.nbs-css-flexcard:nth-child(2n) {
-  margin-right: 0;
+
+.nbs-css-cursor-grab {
+  cursor: grab;
 }
+
 
 .nbs-css-navcontainer {
   position: fixed;
@@ -84,4 +84,49 @@ label {
   left: 0;
   // right: 2em;
   // bottom: 2em;
+}
+
+
+.nbs-css-crycard {
+  border-left: 1px solid #fccffc;
+  border-right: 1px solid #fccffc;
+  border-bottom: 1px solid #fccffc;
+}
+.nbs-css-crycard:first-child {
+  border-top: 1px solid #fccffc;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+.nbs-css-crycard:last-child {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.nbs-css-cryleftmargin {
+  margin-left: calc(50px + 0.5rem);
+  margin-top: 0.5rem;
+}
+
+
+.nbs-css-timelinecard {
+  width: 49%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+.nbs-css-timelinecard:nth-child(2n) {
+  margin-right: 0;
+}
+
+
+.nbs-css-cryformspace {
+  margin-bottom: 12rem;
+}
+
+.nbs-css-cryform {
+  position: fixed;
+  width: inherit;
+  max-width: inherit;
+  bottom: 0;
+  padding-right: 30px;
+  padding-bottom: 0.5rem;
 }

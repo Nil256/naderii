@@ -7,10 +7,6 @@ class TimelinesController < ApplicationController
   def search
   end
 
-  def show
-    @timeline = Timeline.find_by(timelinename: params[:timelinename])
-  end
-
   def new
     @timeline = Timeline.new
     @randomname = SecureRandom.alphanumeric(16)
@@ -34,6 +30,11 @@ class TimelinesController < ApplicationController
       @randomname = params[:timeline][:timelinename]
       render :new
     end
+  end
+
+  def show
+    @timeline = Timeline.find_by(timelinename: params[:timelinename])
+    @cry = Cry.new
   end
 
   def edit
