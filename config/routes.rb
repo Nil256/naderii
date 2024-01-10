@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pets/create'
+  get 'pets/destroy'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "homes#top"
@@ -13,10 +15,11 @@ Rails.application.routes.draw do
   patch "/users/@:username" => "users#update", as: "update_user"
   put "/users/@:username" => "users#update"
 
-  get "/cries/:id" => "cries#show", as: "cry"
-  delete "/cries/:id" => "cries#destroy"
   post "/cries" => "cries#privatecreate", as: "private_cries"
   post "/timelines/@:timelinename/cries" => "cries#publiccreate", as: "public_cries"
+  resources :cries, only: [:show, :destroy] do
+    resource :pets, only: [:create, :destroy]
+  end
 
   # get 'timelines/search'
   get "/timelines/@:timelinename/edit" => "timelines#edit", as: "edit_timeline"

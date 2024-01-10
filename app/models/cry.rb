@@ -7,4 +7,5 @@ class Cry < ApplicationRecord
 
   belongs_to :user
   belongs_to :timeline
+  has_many :pets, dependent: :destroy
 end
