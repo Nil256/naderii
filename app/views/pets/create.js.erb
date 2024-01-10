@@ -1,0 +1,4 @@
+<% if @found_cry %>
+    $('#pet_button_<%= @cry.id %>').html('<%= j(render "layouts/cry/pet", cry: @cry) %>');
+<% end %>
+$('#flash-message').html('<%= j(render "layouts/misc/flash") %>');

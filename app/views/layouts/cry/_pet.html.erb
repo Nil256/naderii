@@ -1,0 +1,13 @@
+<% if !(user_signed_in?) || cry.user_id == current_user.id %>
+  <span class="nad-text-nade-disabled">
+    <i class="far fa-hand-lizard fa-fw"></i> <%= cry.pets.count %>
+  </span>
+<% elsif cry.petted_by?(current_user) %>
+  <%= link_to cry_pets_path(cry.id), method: :delete, remote: true, class: "nad-text-nade" do %>
+    <i class="fas fa-hand-lizard fa-fw"></i> <%= cry.pets.count %>
+  <% end %>
+<% else %>
+  <%= link_to cry_pets_path(cry.id), method: :post, remote: true, class: "nad-text-nade" do %>
+    <i class="far fa-hand-lizard fa-fw"></i> <%= cry.pets.count %>
+  <% end %>
+<% end %>

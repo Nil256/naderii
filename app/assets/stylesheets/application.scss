@@ -23,6 +23,10 @@ $info: #00afff;
 @import 'font-awesome';
 
 
+// text-black-50: ユーザネームやタイムラインネームなど (基本こっち)
+// text-muted: 無効のリンク
+
+
 // デフォルトの上書き
 
 label {
@@ -48,6 +52,18 @@ label {
 
 .nbs-cursor-grab {
   cursor: grab;
+}
+
+
+.nad-text-nade {
+  color: #ff5cff;
+}
+a.nad-text-nade:hover {
+  color: #de5cde;
+}
+
+.nad-text-nade-disabled {
+  color: #bebebe;
 }
 
 

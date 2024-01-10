@@ -1,15 +1,9 @@
 <div class="col-3 position-absolute nbs-css-sidebaruser pt-3">
   <div class="d-flex flex-column">
     <!-- フラッシュメッセージ -->
-    <% if flash[:danger] %>
-      <div class="alert alert-danger">
-        <%= flash[:danger] %>
-      </div>
-    <% elsif flash[:success] %>
-      <div class="alert alert-success">
-        <%= flash[:success] %>
-      </div>
-    <% end %>
+    <div id="flash-message">
+      <%= render "layouts/misc/flash" %>
+    </div>
     <!-- アカウント表示 -->
     <div class="d-flex">
       <div class="align-self-center">

@@ -8,4 +8,8 @@ class Cry < ApplicationRecord
   belongs_to :user
   belongs_to :timeline
   has_many :pets, dependent: :destroy
+
+  def petted_by?(user)
+    pets.where(user_id: user.id).exists?
+  end
 end
