@@ -37,7 +37,11 @@
               <%= render "layouts/cry/pet", cry: cry %>
             </div>
           </div>
-          <div class="flex-fill"></div>
+          <div class="flex-fill">
+            <%= link_to cry_path(cry.id, prev: previous_page_type), class: "nad-cry-link", "title" => "詳細ページを開く" do %>
+              <i class="fas fa-external-link-alt"></i>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

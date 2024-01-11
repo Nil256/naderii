@@ -51,11 +51,6 @@
       <ul class="nav flex-column">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <!--
-            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-danger" do %>
-              <i class="fas fa-sign-out-alt fa-lg fa-fw"></i> ログアウト
-            <% end %>
-            -->
             <a href="#" class="nav-link text-danger" data-toggle="modal" data-target="#logoutmodal">
               <i class="fas fa-sign-out-alt fa-lg fa-fw"></i> ログアウト
             </a>

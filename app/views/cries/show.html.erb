@@ -1,0 +1,126 @@
+<% is_cried_user = (user_signed_in? && @cry.user_id == current_user.id) %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7 mt-3">
+
+      <div class="d-flex sticky-top bg-white border-bottom mb-3">
+        <% if @prev_page == "tl" %>
+          <div class="align-self-center pb-2">
+            <%= link_to timeline_path(@cry.timeline.timelinename), class: "text-secondary", "title" => "戻る" do %>
+              <i class="fas fa-long-arrow-alt-left fa-lg fa-fw"></i>
+            <% end %>
+          </div>
+        <% elsif @prev_page == "u" %>
+          <div class="align-self-center pb-2">
+            <%= link_to user_path(@cry.user.username), class: "text-secondary", "title" => "戻る" do %>
+              <i class="fas fa-long-arrow-alt-left fa-lg fa-fw"></i>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="align-self-center ml-2">
+          <h3><strong>詳細</strong></h3>
+        </div>
+      </div>
+
+      <div class="nad-cries-container">
+        <div class="nad-cry p-3">
+          <div class="d-flex flex-nowrap">
+            <div>
+              <%= attachment_image_tag @cry.user, :profile_image, :fill, 50, 50, format: "png", size: "50x50", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
+            </div>
+            <div class="ml-2 pt-1">
+              <p class="mb-0">
+                <b><%= @cry.user.display_name %></b>
+              </p>
+              <p class="mb-0">
+                <%= link_to user_path(@cry.user.username), class: "text-black-50" do %>
+                  <small>@<%= @cry.user.username %></small>
+                <% end %>
+              </p>
+            </div>
+          </div>
+          <div class="mt-2 nad-cry-body">
+            <%= show_raw_text(@cry.body) %>
+          </div>
+          <% if @cry.timeline_id > 0 %>
+          <div class="mt-3">
+            <%= link_to timeline_path(@cry.timeline.timelinename), class: "d-inline-block blockquote-footer text-black-50" do %>
+              <small>
+                <%= @cry.timeline.display_name %> @<%= @cry.timeline.timelinename %>
+              </small>
+            <% end %>
+          </div>
+          <% end %>
+          <div class="mt-3">
+            <div class="d-flex text-center">
+              <div class="flex-fill"></div>
+              <div class="flex-fill"></div>
+              <div class="flex-fill">
+                <span id="pet_button_<%= @cry.id %>">
+                  <%= render "layouts/cry/pet", cry: @cry %>
+                </span>
+                <% if !(user_signed_in?) || @cry.user_id == current_user.id %>
+                  <span class="nad-cry-link-disabled">なで</span>
+                <% else %>
+                  <span class="nad-cry-link-nade">なで</span>
+                <% end %>
+              </div>
+              <div class="flex-fill">
+                <% if is_cried_user %>
+                  <a href="#" class="text-danger text-decoration-none" data-toggle="modal" data-target="#crydeletemodal">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                <% else %>
+                  <span class="nad-cry-link-disabled" title="他の人の投稿は消せないよ">
+                    <i class="fas fa-times"></i>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>
+<% if is_cried_user %>
+<div class="modal fade" id="crydeletemodal" tabindex="-1" role="dialog" aria-labelledby="crydeletemodaltitle" aria-hidden="true">
+<% else %>
+<div class="modal fade" id="crydeletemodal" tabindex="-1" role="dialog" aria-labelledby="crydeletemodaltitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<% end %>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="crydeletemodaltitle">
+          <% if is_cried_user %>
+            確認
+          <% else %>
+            ...。
+          <% end %>
+        </h5>
+        <% if is_cried_user %>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <% end %>
+      </div>
+      <% if is_cried_user %>
+      <div class="modal-body">
+        この投稿を削除します。<br/>
+        削除した投稿は元に戻せません。<br/>
+        よろしいですか？
+      </div>
+      <% end %>
+      <div class="modal-footer">
+        <% if is_cried_user %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ちょっと待って</button>
+          <%= link_to "消す", cry_path(@cry.id, prev: @prev_page), method: :delete, class: "btn btn-danger" %>
+        <% else %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ごめんなさい</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

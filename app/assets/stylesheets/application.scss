@@ -55,18 +55,6 @@ label {
 }
 
 
-.nad-text-nade {
-  color: #ff5cff;
-}
-a.nad-text-nade:hover {
-  color: #de5cde;
-}
-
-.nad-text-nade-disabled {
-  color: #bebebe;
-}
-
-
 // ユニークなCSSを持っている部品
 
 // サイドバー
@@ -134,6 +122,26 @@ a.nad-text-nade:hover {
   margin-left: calc(50px + 0.5rem);
   margin-top: 0.5rem;
 }
+
+.nad-cry-link {
+  color: #bcbcbc;
+}
+a.nad-cry-link:hover {
+  color: #a0a0a0;
+}
+
+.nad-cry-link-disabled {
+  color: #cfcfcf;
+}
+
+.nad-cry-link-nade {
+  color: #ff5cff;
+}
+a.nad-cry-link-nade:hover {
+  color: #de5cde;
+}
+
+
 
 
 // timeline (index)

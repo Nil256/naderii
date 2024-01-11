@@ -35,7 +35,7 @@
         </p>
       </div>
 
-      <%= render "layouts/cries", cries: @user.cries.order(created_at: :desc), show_timeline: true %>
+      <%= render "layouts/cries", cries: @user.cries.order(created_at: :desc), show_timeline: true, previous_page_type: "u" %>
     </div>
     <div class="col-3"></div>
   </div>

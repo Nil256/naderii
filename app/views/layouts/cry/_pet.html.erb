@@ -1,13 +1,19 @@
 <% if !(user_signed_in?) || cry.user_id == current_user.id %>
-  <span class="nad-text-nade-disabled">
+  <span class="nad-cry-link-disabled">
     <i class="far fa-hand-lizard fa-fw"></i> <%= cry.pets.count %>
   </span>
 <% elsif cry.petted_by?(current_user) %>
-  <%= link_to cry_pets_path(cry.id), method: :delete, remote: true, class: "nad-text-nade" do %>
-    <i class="fas fa-hand-lizard fa-fw"></i> <%= cry.pets.count %>
-  <% end %>
+  <span class="nad-cry-link-nade">
+    <%= link_to cry_pets_path(cry.id), method: :delete, class: "text-decoration-none", remote: true do %>
+      <i class="fas fa-hand-lizard fa-fw"></i>
+    <% end %>
+    <%= cry.pets.count %>
+  </span>
 <% else %>
-  <%= link_to cry_pets_path(cry.id), method: :post, remote: true, class: "nad-text-nade" do %>
-    <i class="far fa-hand-lizard fa-fw"></i> <%= cry.pets.count %>
-  <% end %>
+  <span class="nad-cry-link-nade">
+    <%= link_to cry_pets_path(cry.id), method: :post, remote: true, class: "text-decoration-none", "title" => "なでる" do %>
+      <i class="far fa-hand-lizard fa-fw"></i>
+    <% end %>
+    <%= cry.pets.count %>
+  </span>
 <% end %>

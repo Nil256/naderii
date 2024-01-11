@@ -33,7 +33,7 @@
       </div>
 
       <div class=<%= "nad-cryform-space" if user_signed_in? %>>
-        <%= render "layouts/cries", cries: @timeline.cries.order(created_at: :desc), show_timeline: false %>
+        <%= render "layouts/cries", cries: @timeline.cries.order(created_at: :desc), show_timeline: false, previous_page_type: "tl" %>
       </div>
 
       <% if user_signed_in? %>

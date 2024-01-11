@@ -36,9 +36,25 @@ class CriesController < ApplicationController
   end
 
   def show
+    @prev_page = params[:prev]
+    @prev_page ||= ""
+    @cry = Cry.find(params[:id])
   end
 
   def destroy
+    prev_page = params[:prev]
+    cry = Cry.find(params[:id])
+    if user_signed_in? && cry.user_id == current_user.id
+      cry.destroy
+      flash.now[:success] = "投稿を削除しました。"
+    else
+      flash.now[:danger] = "他の人の投稿を消すことはできません。"
+    end
+    if prev_page == "tl"
+      redirect_to timeline_path(cry.timeline.timelinename)
+    else
+      redirect_to user_path(cry.user.username)
+    end
   end
 
   private
