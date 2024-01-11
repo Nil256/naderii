@@ -13,4 +13,5 @@ class Timeline < ApplicationRecord
 
   belongs_to :user
   has_many :cries, dependent: :destroy
+  has_many :timeline_follows, dependent: :destroy
 end

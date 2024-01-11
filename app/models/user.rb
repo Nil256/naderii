@@ -18,4 +18,6 @@ class User < ApplicationRecord
   has_many :timelines, dependent: :destroy
   has_many :cries, dependent: :destroy
   has_many :pets, dependent: :destroy
+  has_many :user_follows, dependent: :destroy
+  has_many :timeline_follows, dependent: :destroy
 end
