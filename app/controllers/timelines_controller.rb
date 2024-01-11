@@ -1,6 +1,7 @@
 class TimelinesController < ApplicationController
   def index
-    @timelines = Timeline.all
+    #@timelines = Timeline.all
+    @timelines = Timeline.where(is_dummy: false)
     # @following_timelines = Timeline.where
   end
 
@@ -33,7 +34,11 @@ class TimelinesController < ApplicationController
   end
 
   def show
-    @timeline = Timeline.find_by(timelinename: params[:timelinename])
+    @timeline = Timeline.find_by!(timelinename: params[:timelinename])
+    if @timeline.is_dummy
+      raise ActiveRecord::RecordNotFound.new("Couldn't find Timeline")
+      return
+    end
     @cry = Cry.new
   end
 

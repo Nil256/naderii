@@ -19,7 +19,7 @@
       <div class="mt-2 nad-cry-body">
         <%= show_raw_text(cry.body) %>
       </div>
-      <% if show_timeline && cry.timeline_id > 0 %>
+      <% if show_timeline && !cry.is_personal %>
       <div class="mt-3">
         <%= link_to timeline_path(cry.timeline.timelinename), class: "d-inline-block blockquote-footer text-black-50" do %>
           <small>

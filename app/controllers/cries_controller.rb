@@ -23,8 +23,14 @@ class CriesController < ApplicationController
       redirect_to new_user_session_path
       return
     end
+    dummy_timeline = Timeline.find_by(is_dummy: true)
+    if dummy_timeline.nil?
+      redirect_to home_path
+      return
+    end
     @cry = current_user.cries.new(cry_params)
-    @cry.timeline_id = 0
+    logger.debug cry_params
+    @cry.timeline_id = dummy_timeline.id
     @cry.is_personal = true
     if @cry.save
       flash[:success] = "投稿できたよ！"
