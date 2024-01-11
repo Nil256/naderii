@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_10_050525) do
+ActiveRecord::Schema.define(version: 2024_01_11_020052) do
 
   create_table "cries", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2024_01_10_050525) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "timeline_follows", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "timeline_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "timelines", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "timelinename", null: false
@@ -36,6 +43,13 @@ ActiveRecord::Schema.define(version: 2024_01_10_050525) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["timelinename"], name: "index_timelines_on_timelinename", unique: true
+  end
+
+  create_table "user_follows", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "followed_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
