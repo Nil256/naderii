@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_11_020052) do
+ActiveRecord::Schema.define(version: 2024_01_11_123210) do
 
   create_table "cries", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2024_01_11_020052) do
     t.text "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_dummy", default: false, null: false
     t.index ["timelinename"], name: "index_timelines_on_timelinename", unique: true
   end
 
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 2024_01_11_020052) do
     t.string "display_name", default: "ユーザー", null: false
     t.string "profile_image_id"
     t.text "introduction"
+    t.boolean "is_administrator", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
