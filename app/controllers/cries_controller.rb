@@ -28,10 +28,10 @@ class CriesController < ApplicationController
     @cry.is_personal = true
     if @cry.save
       flash[:success] = "投稿できたよ！"
-      redirect_to user_path(@user.username)
+      redirect_to home_path
     else
-      @user = current_user
-      render "users/show"
+      redirect_to home_path
+      # render "homes/main"
     end
   end
 
@@ -52,6 +52,8 @@ class CriesController < ApplicationController
     end
     if prev_page == "tl"
       redirect_to timeline_path(cry.timeline.timelinename)
+    elsif prev_page == "home" && user_signed_in?
+      redirect_to home_path
     else
       redirect_to user_path(cry.user.username)
     end

@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7 mt-3">
+      <%= render "layouts/header/common", hl: "ホーム" %>
+
+      <div class=<%= "nad-cryform-space" if user_signed_in? %>>
+        <%= render "layouts/cries", cries: @cries, show_timeline: true, previous_page_type: "home" %>
+      </div>
+
+      <% if user_signed_in? %>
+      <div class="nad-cryform bg-white py-2">
+        <%= form_with model: @cry, url: private_cries_path, local: true do |f| %>
+          <%= f.text_area :body, class: "form-control nbs-resize-none", rows: 4, placeholder: "" %>
+          <div class="d-flex">
+            <div>
+              ホーム投稿まだできない
+            </div>
+            <div class="ml-auto">
+              <%= button_tag type: "submit", class: "btn btn-primary", "title" => "投稿する" do %>
+                <i class="fas fa-paper-plane fa-lg"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>

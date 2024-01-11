@@ -17,6 +17,12 @@
               <i class="fas fa-long-arrow-alt-left fa-lg fa-fw"></i>
             <% end %>
           </div>
+        <% elsif @prev_page == "home" && user_signed_in? %>
+          <div class="align-self-center pb-2">
+            <%= link_to home_path, class: "text-secondary", "title" => "戻る" do %>
+              <i class="fas fa-long-arrow-alt-left fa-lg fa-fw"></i>
+            <% end %>
+          </div>
         <% end %>
         <div class="align-self-center ml-2">
           <h3><strong>詳細</strong></h3>
@@ -58,7 +64,7 @@
               <div class="flex-fill"></div>
               <div class="flex-fill">
                 <span id="pet_button_<%= @cry.id %>">
-                  <%= render "layouts/cry/pet", cry: @cry %>
+                  <%= render "layouts/button/pet", cry: @cry %>
                 </span>
                 <% if !(user_signed_in?) || @cry.user_id == current_user.id %>
                   <span class="nad-cry-link-disabled">なで</span>
