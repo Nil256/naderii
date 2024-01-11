@@ -1,0 +1,9 @@
+<% if timeline.followd_by?(current_user) %>
+  <%= link_to timeline_follows_path(timeline.timelinename), method: :delete, remote: true, class: "btn btn-primary", "title" => "フォロー解除する" do %>
+    フォロー中
+  <% end %>
+<% else %>
+  <%= link_to timeline_follows_path(timeline.timelinename), method: :post, remote: true, class: "btn btn-outline-primary", "title" => "フォローする" do %>
+    フォローする
+  <% end %>
+<% end %>

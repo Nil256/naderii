@@ -1,0 +1,4 @@
+<% if @found_user %>
+  $('#user_follow_button_<%= @user.username %>').html('<%= j(render "layouts/button/user_follow", user: @user) %>');
+<% end %>
+$('#flash-message').html('<%= j(render "layouts/misc/flash") %>');

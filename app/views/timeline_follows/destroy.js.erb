@@ -1,0 +1,4 @@
+<% if @found_timeline %>
+  $('#timeline_follow_button_<%= @timeline.timelinename %>').html('<%= j(render "layouts/button/timeline_follow", timeline: @timeline) %>');
+<% end %>
+$('#flash-message').html('<%= j(render "layouts/misc/flash") %>');

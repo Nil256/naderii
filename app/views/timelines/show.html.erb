@@ -8,13 +8,20 @@
           <p class="mb-0 h5"><b><%= @timeline.display_name %></b></p>
           <p class="mb-0 text-black-50"><small>@<%= @timeline.timelinename %></small></p>
         </div>
-        <% if is_timeline_admin %>
-        <div class="align-self-center ml-auto">
-          <%= link_to edit_timeline_path(@timeline.timelinename), class: "text-secondary", "title" => "編集する" do %>
-            <i class="fas fa-pen fa-lg"></i>
+        <div class="align-self-center ml-auto d-flex">
+          <% if user_signed_in? %>
+            <div class="align-self-center", id="timeline_follow_button_<%= @timeline.timelinename %>">
+              <%= render "layouts/button/timeline_follow", timeline: @timeline %>
+            </div>
+          <% end %>
+          <% if is_timeline_admin %>
+            <div class="align-self-center ml-3">
+              <%= link_to edit_timeline_path(@timeline.timelinename), class: "text-secondary", "title" => "編集する" do %>
+                <i class="fas fa-pen fa-lg"></i>
+              <% end %>
+            </div>
           <% end %>
         </div>
-        <% end %>
       </div>
 
       <div class="border-bottom mb-3">

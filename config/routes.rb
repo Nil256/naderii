@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  get 'pets/create'
-  get 'pets/destroy'
+  # get 'user_follows/create'
+  # get 'user_follows/destroy'
+  # get 'timeline_follows/create'
+  # get 'timeline_follows/destroy'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "homes#top"
 
   get "/home" => "homes#main", as: "home"
+
+  post "/users/@:username/follows" => "user_follows#create", as: "user_follows"
+  delete "/users/@:username/follows" => "user_follows#destroy"
 
   get "/users/@:username/edit/dangerzone" => "users#dangeredit", as: "dangeredit_user"
   get "/users/@:username/edit" => "users#edit", as: "edit_user"
@@ -20,6 +25,9 @@ Rails.application.routes.draw do
   resources :cries, only: [:show, :destroy] do
     resource :pets, only: [:create, :destroy]
   end
+
+  post "/timelines/@:timelinename/follows" => "timeline_follows#create", as: "timeline_follows"
+  delete "/timelines/@:timelinename/follows" => "timeline_follows#destroy"
 
   # get 'timelines/search'
   get "/timelines/@:timelinename/edit" => "timelines#edit", as: "edit_timeline"

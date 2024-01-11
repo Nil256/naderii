@@ -14,4 +14,8 @@ class Timeline < ApplicationRecord
   belongs_to :user
   has_many :cries, dependent: :destroy
   has_many :timeline_follows, dependent: :destroy
+
+  def followd_by?(user)
+    timeline_follows.where(user_id: user.id).exists?
+  end
 end

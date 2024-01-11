@@ -20,4 +20,8 @@ class User < ApplicationRecord
   has_many :pets, dependent: :destroy
   has_many :user_follows, dependent: :destroy
   has_many :timeline_follows, dependent: :destroy
+
+  def followed_by?(user)
+    user.user_follows.where(followed_user_id: id).exists?
+  end
 end

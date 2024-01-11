@@ -1,0 +1,9 @@
+<% if user.followed_by?(current_user) %>
+  <%= link_to user_follows_path(user.username), method: :delete, remote: true, class: "btn btn-primary", "title" => "フォロー解除する" do %>
+    フォロー中
+  <% end %>
+<% else %>
+  <%= link_to user_follows_path(user.username), method: :post, remote: true, class: "btn btn-outline-primary", "title" => "フォローする" do %>
+    フォローする
+  <% end %>
+<% end %>
