@@ -19,6 +19,11 @@
           <%= f.submit "これにする", class: "btn btn-primary" %>
         </div>
       <% end %>
+      <div class="mt-5">
+        <%= link_to dangeredit_timeline_path, class: "text-danger" do %>
+          <small>危険性のある設定を開く</small>
+        <% end %>
+      </div>
     </div>
     <div class="col-3"></div>
   </div>

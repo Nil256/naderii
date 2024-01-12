@@ -30,8 +30,11 @@ Rails.application.routes.draw do
   delete "/timelines/@:timelinename/follows" => "timeline_follows#destroy"
 
   # get 'timelines/search'
+  get "/timelines/@:timelinename/edit/dangerzone" => "timelines#dangeredit", as: "dangeredit_timeline"
   get "/timelines/@:timelinename/edit" => "timelines#edit", as: "edit_timeline"
   get "/timelines/@:timelinename" => "timelines#show", as: "timeline"
+  patch "/timelines/@:timelinename/danger" => "timelines#dangerupdate", as: "dangerupdate_timeline"
+  put "/timelines/@:timelinename/danger" => "timelines#dangerupdate"
   patch "/timelines/@:timelinename" => "timelines#update", as: "update_timeline"
   put "/timelines/@:timelinename" => "timelines#update"
   resources :timelines, only: [:index, :new, :create]
