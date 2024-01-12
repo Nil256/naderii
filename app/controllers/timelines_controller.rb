@@ -54,6 +54,15 @@ class TimelinesController < ApplicationController
     @timeline = Timeline.find_by!(timelinename: params[:timelinename])
     @correct_timelinename = @timeline.timelinename
     @opened_timelinename = "false"
+    @transfer_username = ""
+    if @timeline.is_transferring
+      transfer = Notification.find_by(action: "TimelineTransferRequest", actioned_target_id: @timeline.id)
+      if !(transfer.nil?)
+        user = User.find_by(id: transfer.receive_user_id)
+        @transfer_username = user.username if !(user.nil?)
+      end
+    end
+    @transfer_username_error = ""
     @opened_transfer = "false"
     if !(user_signed_in?) || @timeline.user_id != current_user.id
       flash[:danger] = "タイムラインの編集はそのタイムラインの管理者でないとできません。"
@@ -89,9 +98,61 @@ class TimelinesController < ApplicationController
       redirect_to timeline_path(@timeline.timelinename)
     else
       @opened_timelinename = "true"
+      @transfer_username = ""
+      @transfer_username_error = ""
       @opened_transfer = "false"
       render :dangeredit
     end
+  end
+
+  def transferrequest
+    @timeline = Timeline.find_by!(timelinename: params[:timelinename])
+    if !(user_signed_in?) || @timeline.user_id != current_user.id
+      flash[:danger] = "タイムラインの編集はそのタイムラインの管理者でないとできません。"
+      redirect_to timeline_path(@timeline.timelinename)
+      return
+    end
+    if @timeline.is_transferring
+      flash[:danger] = "既にタイムラインの譲渡を行っています。"
+      redirect_to timeline_path(@timeline.timelinename)
+      return
+    end
+    @transfer_username = params[:username]
+    user = User.find_by(username: @transfer_username)
+    if user.nil?
+      @correct_timelinename = @timeline.timelinename
+      @opened_timelinename = "false"
+      @transfer_username_error = "ユーザー\"@#{@transfer_username}\"が見つかりませんでした。"
+      @opened_transfer = "true"
+      render :dangeredit
+    elsif user.id == current_user.id
+      @correct_timelinename = @timeline.timelinename
+      @opened_timelinename = "false"
+      @transfer_username_error = "指定したユーザーは自分自身です。"
+      @opened_transfer = "true"
+      render :dangeredit
+    else
+      Notification.new(send_user_id: current_user.id, receive_user_id: user.id, action: "TimelineTransferRequest", actioned_target_id: @timeline.id).save
+      @timeline.update(is_transferring: true)
+      flash[:success] = "ユーザー\"@#{@transfer_username}\"にタイムラインの譲渡をリクエストしました。承諾するまで譲渡は完了しません。"
+      redirect_to timeline_path(@timeline.timelinename)
+    end
+  end
+
+  def transfercancel
+    @timeline = Timeline.find_by!(timelinename: params[:timelinename])
+    if !(user_signed_in?) || @timeline.user_id != current_user.id
+      flash[:danger] = "タイムラインの編集はそのタイムラインの管理者でないとできません。"
+      redirect_to timeline_path(@timeline.timelinename)
+      return
+    end
+    transfers = Notification.where(action: "TimelineTransferRequest", actioned_target_id: @timeline.id)
+    transfers.each do |transfer|
+      transfer.destroy
+    end
+    @timeline.update(is_transferring: false)
+    flash[:success] = "タイムラインの譲渡を取り消しました。"
+    redirect_to timeline_path(@timeline.timelinename)
   end
 
   def destroy
@@ -100,6 +161,10 @@ class TimelinesController < ApplicationController
       flash[:danger] = "タイムラインの削除はそのタイムラインの管理者でないとできません。"
       redirect_to timeline_path(@timeline.timelinename)
       return
+    end
+    transfers = Notification.where(action: "TimelineTransferRequest", actioned_target_id: @timeline.id)
+    transfers.each do |transfer|
+      transfer.destroy
     end
     @timeline.destroy
     flash[:success] = "タイムラインを削除しました。"

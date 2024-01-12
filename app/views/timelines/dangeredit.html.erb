@@ -44,6 +44,80 @@
         <% end %>
       </div>
 
+      <% if !@timeline.is_transferring %>
+
+        <div class="pl-1 mb-3">
+          <button class="btn btn-outline-warning" type="button" data-toggle="collapse" data-target="#timelinetransferrequest" aria-controls="timelinetransferrequest" aria-expanded=<%= @opened_transfer %>>
+            管理者権限の譲渡
+          </button>
+        </div>
+
+        <div class="collapse<%= " show" if @opened_transfer == "true" %>" id="timelinetransferrequest">
+          <h3>タイムラインの管理者権限の譲渡</h3>
+          <div class="alert alert-warning mb-1">
+            タイムラインの管理者の権限を譲渡します。<br>
+            タイムラインネームの管理者は以下のことができます。
+            <ul>
+              <li>タイムラインネーム、表示名、概要の変更</li>
+              <li>タイムラインの管理者権限の譲渡</li>
+              <li>タイムラインの削除</li>
+            </ul>
+            <b>権限を譲渡した場合、上記の権限を失います。</b>
+          </div>
+          <div class="alert alert-info">
+            権限の譲渡は、譲渡先のユーザーが承諾するまで完了しません。<br>
+            譲渡が完了するまでは、譲渡の取り消しができます。<br>
+            また、譲渡先のユーザーは譲渡を拒否できます。
+          </div>
+          <%= form_with url: timeline_transfer_path(@correct_timelinename), local: true, class: "mb-5" do |f| %>
+            <div class="form-group">
+              <label>譲渡先のユーザーのユーザーネーム</label>
+
+              <% if @transfer_username_error.present? %>
+                <div class="alert alert-danger">
+                  <%= @transfer_username_error %>
+                </div>
+              <% end %>
+
+              <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text">@</span></div>
+                <%= f.text_field :username, class: "form-control", "value" => @transfer_username %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.submit "権限を譲渡する", class: "btn btn-warning" %>
+            </div>
+          <% end %>
+        </div>
+
+      <% else %>
+
+        <div class="pl-1 mb-3">
+          <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#timelinetransfercancel" aria-controls="timelinetransfercancel" aria-expanded=<%= @opened_transfer %>>
+            管理者権限譲渡の取り消し
+          </button>
+        </div>
+
+        <div class="collapse<%= " show" if @opened_transfer == "true" %>" id="timelinetransfercancel">
+          <h3>タイムラインの管理者権限譲渡の取り消し</h3>
+          <div class="alert alert-info">
+            タイムラインの管理者の権限を譲渡を取り消します。<br>
+            <% if @transfer_username.present? %>
+              現在、@<%= @transfer_username %>に権限の譲渡をリクエストしています。
+            <% else %>
+              現在、権限の譲渡でエラーが発生しています。<br>
+              お手数をおかけしますが取り消してください。
+            <% end %>
+          </div>
+          <%= link_to timeline_transfer_path(@correct_timelinename), method: :delete, class: "btn btn-info mb-5" do %>
+            譲渡を取り消す
+          <% end %>
+        </div>
+
+      <% end %>
+
+
       <div class="pl-1 mb-3">
         <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#timelinedelete" aria-controls="timelinedelete" aria-expanded="false">
           タイムラインの削除
@@ -51,14 +125,17 @@
       </div>
       <div class="collapse" id="timelinedelete">
         <h3>タイムラインの削除</h3>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger mb-1">
           タイムラインを削除します。<br>
           タイムラインを削除すると以下のデータも同様に削除されます。
           <ul>
             <li>タイムラインに投稿された投稿</li>
             <li>タイムラインのフォロワー</li>
           </ul>
-          <b>タイムラインの復元はできません。</b>
+          <b>タイムラインの復元はできません。</b><br>
+        </div>
+        <div class="alert alert-info">
+          タイムラインの譲渡を行っている場合、譲渡も取り消しされます。
         </div>
 
         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#timelinedeletemodal">
@@ -83,7 +160,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>@<%= @timeline.timelinename %>を削除します。</p>
+        <p>タイムライン"@<%= @timeline.timelinename %>"を削除します。</p>
         <div class="alert alert-danger">
           タイムラインを削除すると以下のデータも同様に削除されます。
           <ul>

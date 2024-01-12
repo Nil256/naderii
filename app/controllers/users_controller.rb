@@ -54,6 +54,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    # 削除時、タイムライン譲渡を自動的に拒否すること
+  end
+
   private
   def user_params
     params.require(:user).permit(:profile_image, :display_name, :introduction)

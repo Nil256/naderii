@@ -61,7 +61,7 @@ class CriesController < ApplicationController
       cry.destroy
       flash.now[:success] = "投稿を削除しました。"
     else
-      flash.now[:danger] = "他の人の投稿を消すことはできません。"
+      flash.now[:danger] = "他の人の投稿を削除することはできません。"
     end
     if prev_page == "tl"
       redirect_to timeline_path(cry.timeline.timelinename)

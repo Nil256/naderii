@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   delete "/timelines/@:timelinename/follows" => "timeline_follows#destroy"
 
   # get 'timelines/search'
+  post "/timelines/@:timelinename/transfer" => "timelines#transferrequest", as: "timeline_transfer"
+  delete "/timelines/@:timelinename/transfer" => "timelines#transfercancel"
   get "/timelines/@:timelinename/edit/dangerzone" => "timelines#dangeredit", as: "dangeredit_timeline"
   get "/timelines/@:timelinename/edit" => "timelines#edit", as: "edit_timeline"
   get "/timelines/@:timelinename" => "timelines#show", as: "timeline"
