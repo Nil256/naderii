@@ -1,6 +1,10 @@
 class CriesController < ApplicationController
   def publiccreate
     @timeline = Timeline.find_by!(timelinename: params[:timelinename])
+    if @timeline.is_dummy
+      raise ActiveRecord::RecordNotFound.new("Couldn't find Timeline")
+      return
+    end
     if !(user_signed_in?)
       flash[:danger] = "投稿するにはログインする必要があります。"
       redirect_to timeline_path(@timeline.timelinename)
@@ -36,8 +40,11 @@ class CriesController < ApplicationController
       flash[:success] = "投稿できたよ！"
       redirect_to home_path
     else
-      redirect_to home_path
-      # render "homes/main"
+      @cries = Cry.where(user_id: [current_user.id, *current_user.user_follows.pluck(:followed_user_id)])
+           .or(Cry.where(timeline_id: current_user.timeline_follows.pluck(:timeline_id)))
+           .order(created_at: :desc)
+      @can_post_private_cry = true
+      render "homes/main"
     end
   end
 

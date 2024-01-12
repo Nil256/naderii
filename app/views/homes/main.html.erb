@@ -17,6 +17,7 @@
 
       <% if is_available_private_cry %>
       <div class="nad-cryform bg-white py-2">
+        <%= render "layouts/error/each", model: @cry, symbol: :body %>
         <%= form_with model: @cry, url: private_cries_path, local: true do |f| %>
           <%= f.text_area :body, class: "form-control nbs-resize-none", rows: 4, placeholder: "" %>
           <div class="d-flex">
