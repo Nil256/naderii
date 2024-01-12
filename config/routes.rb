@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get "/timelines/@:timelinename/edit/dangerzone" => "timelines#dangeredit", as: "dangeredit_timeline"
   get "/timelines/@:timelinename/edit" => "timelines#edit", as: "edit_timeline"
   get "/timelines/@:timelinename" => "timelines#show", as: "timeline"
+  delete "/timelines/@:timelinename" => "timelines#destroy", as: "destroy_timeline"
   patch "/timelines/@:timelinename/danger" => "timelines#dangerupdate", as: "dangerupdate_timeline"
   put "/timelines/@:timelinename/danger" => "timelines#dangerupdate"
   patch "/timelines/@:timelinename" => "timelines#update", as: "update_timeline"

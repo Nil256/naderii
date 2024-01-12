@@ -38,6 +38,7 @@ class TimelinesController < ApplicationController
       raise ActiveRecord::RecordNotFound.new("Couldn't find Timeline")
       return
     end
+    @cries = @timeline.cries.order(created_at: :desc)
     @cry = Cry.new
   end
 
@@ -68,6 +69,7 @@ class TimelinesController < ApplicationController
       return
     end
     if @timeline.update(timeline_params)
+      flash[:success] = "タイムラインを更新したよ！"
       redirect_to timeline_path(@timeline.timelinename)
     else
       render :edit
@@ -83,6 +85,7 @@ class TimelinesController < ApplicationController
       return
     end
     if @timeline.update(timeline_params_danger)
+      flash[:success] = "タイムラインネームを変更しました。"
       redirect_to timeline_path(@timeline.timelinename)
     else
       @opened_timelinename = "true"
@@ -92,6 +95,15 @@ class TimelinesController < ApplicationController
   end
 
   def destroy
+    @timeline = Timeline.find_by!(timelinename: params[:timelinename])
+    if !(user_signed_in?) || @timeline.user_id != current_user.id
+      flash[:danger] = "タイムラインの削除はそのタイムラインの管理者でないとできません。"
+      redirect_to timeline_path(@timeline.timelinename)
+      return
+    end
+    @timeline.destroy
+    flash[:success] = "タイムラインを削除しました。"
+    redirect_to timelines_path
   end
 
   private
