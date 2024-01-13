@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-7 mt-3">
+      <%= render "layouts/header/common", hl: "通知" %>
+
+      <div class="nad-list-group">
+        <% @notifications.each do |notify| %>
+          <div class="nad-list-item">
+            <%= render "notifications/header", notification: notify %>
+            <div class="d-flex mt-2">
+              <div class="">
+                <% if notify.user.is_administrator %>
+                <% else %>
+                  <%= attachment_image_tag notify.user, :profile_image, :fill, 40, 40, format: "png", size: "40x40", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
+                <% end %>
+              </div>
+              <div class="ml-2">
+                <% if notify.action == "TimelineTransferRequest" %>
+                  <%= render "notifications/timeline-transfer-request", notification: notify %>
+                <% elsif notify.action == "TimelineTransferAccept" %>
+                  <%= render "notifications/timeline-transfer-accept", notification: notify %>
+                <% elsif notify.action == "TimelineTransferReject" %>
+                  <%= render "notifications/timeline-transfer-reject", notification: notify %>
+                <% elsif notify.action == "TimelineTransferred" %>
+                  <%= render "notifications/timeline-transferred", notification: notify %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>

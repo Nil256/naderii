@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_12_032441) do
+ActiveRecord::Schema.define(version: 2024_01_12_095720) do
 
   create_table "cries", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 2024_01_12_032441) do
     t.integer "send_user_id"
     t.integer "receive_user_id"
     t.string "action", default: "", null: false
-    t.integer "actioned_target_id"
     t.boolean "is_checked", default: false, null: false
     t.text "additional_messages", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "timeline_id"
   end
 
   create_table "pets", force: :cascade do |t|

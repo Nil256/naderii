@@ -21,7 +21,14 @@ class User < ApplicationRecord
   has_many :user_follows, dependent: :destroy
   has_many :timeline_follows, dependent: :destroy
 
+  has_many :notifications, foreign_key: :receive_user_id, dependent: :destroy
+  has_many :sended_notifications, class_name: "Notification", foreign_key: :send_user_id, dependent: :destroy
+
   def followed_by?(user)
     user.user_follows.where(followed_user_id: id).exists?
+  end
+
+  def notifications_any?
+    notifications.where(is_checked: false).exists?
   end
 end

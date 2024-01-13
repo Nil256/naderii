@@ -55,6 +55,28 @@ label {
 }
 
 
+// なでりー専用共通部品
+.nad-list-group {
+  margin-bottom: 15px;
+}
+
+.nad-list-item {
+  padding: 1rem;
+  border-left: 1px solid #fccffc;
+  border-right: 1px solid #fccffc;
+  border-bottom: 1px solid #fccffc;
+}
+.nad-list-item:first-child {
+  border-top: 1px solid #fccffc;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+.nad-list-item:last-child {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+
 // ユニークなCSSを持っている部品
 
 // サイドバー
@@ -99,25 +121,6 @@ label {
 
 
 // cry
-.nad-cries-container {
-  margin-bottom: 15px;
-}
-
-.nad-cry {
-  border-left: 1px solid #fccffc;
-  border-right: 1px solid #fccffc;
-  border-bottom: 1px solid #fccffc;
-}
-.nad-cry:first-child {
-  border-top: 1px solid #fccffc;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-}
-.nad-cry:last-child {
-  border-bottom-left-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-}
-
 .nad-cry-body {
   margin-left: calc(50px + 0.5rem);
   margin-top: 0.5rem;

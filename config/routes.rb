@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   get "/home" => "homes#main", as: "home"
 
+  resources :notifications, only: [:index]
+  post "/timelinetransfer/:id" => "notifications#timelinetransferaccept", as: "response_timeline_transfer"
+  delete "/timelinetransfer/:id" => "notifications#timelinetransferreject"
+
   post "/users/@:username/follows" => "user_follows#create", as: "user_follows"
   delete "/users/@:username/follows" => "user_follows#destroy"
 

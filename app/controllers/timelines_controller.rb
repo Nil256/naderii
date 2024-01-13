@@ -56,7 +56,7 @@ class TimelinesController < ApplicationController
     @opened_timelinename = "false"
     @transfer_username = ""
     if @timeline.is_transferring
-      transfer = Notification.find_by(action: "TimelineTransferRequest", actioned_target_id: @timeline.id)
+      transfer = Notification.find_by(action: "TimelineTransferRequest", timeline_id: @timeline.id)
       if !(transfer.nil?)
         user = User.find_by(id: transfer.receive_user_id)
         @transfer_username = user.username if !(user.nil?)
@@ -132,9 +132,9 @@ class TimelinesController < ApplicationController
       @opened_transfer = "true"
       render :dangeredit
     else
-      Notification.new(send_user_id: current_user.id, receive_user_id: user.id, action: "TimelineTransferRequest", actioned_target_id: @timeline.id).save
+      Notification.new(send_user_id: current_user.id, receive_user_id: user.id, action: "TimelineTransferRequest", timeline_id: @timeline.id).save
       @timeline.update(is_transferring: true)
-      flash[:success] = "ユーザー\"@#{@transfer_username}\"にタイムラインの譲渡をリクエストしました。承諾するまで譲渡は完了しません。"
+      flash[:success] = "ユーザー\"@#{@transfer_username}\"にタイムラインの譲渡を申請しました。承諾するまで譲渡は完了しません。"
       redirect_to timeline_path(@timeline.timelinename)
     end
   end
@@ -146,7 +146,7 @@ class TimelinesController < ApplicationController
       redirect_to timeline_path(@timeline.timelinename)
       return
     end
-    transfers = Notification.where(action: "TimelineTransferRequest", actioned_target_id: @timeline.id)
+    transfers = Notification.where(action: "TimelineTransferRequest", timeline_id: @timeline.id)
     transfers.each do |transfer|
       transfer.destroy
     end
@@ -162,7 +162,7 @@ class TimelinesController < ApplicationController
       redirect_to timeline_path(@timeline.timelinename)
       return
     end
-    transfers = Notification.where(action: "TimelineTransferRequest", actioned_target_id: @timeline.id)
+    transfers = Notification.where(action: "TimelineTransferRequest", timeline_id: @timeline.id)
     transfers.each do |transfer|
       transfer.destroy
     end

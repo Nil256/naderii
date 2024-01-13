@@ -36,5 +36,28 @@
         </li>
       </ul>
     </li>
+
+    <!-- 通知 -->
+    <li class="nav-item">
+      <% if controller_name == "notifications" %>
+        <span class="nav-link text-muted">
+          <i class="fas fa-bell fa-lg fa-fw"></i> 通知
+        </span>
+      <% else %>
+        <%= link_to notifications_path, class: "nav-link" do %>
+          <span class="d-flex">
+            <span class="align-self-center">
+              <i class="fas fa-bell fa-lg fa-fw"></i> 通知
+            </span>
+            <% if current_user.notifications_any? %>
+            <span class="align-self-center ml-auto">
+              <span class="badge badge-pill badge-primary">!</span>
+            </span>
+            <% end %>
+          </span>
+        <% end %>
+      <% end %>
+
+    </li>
   </ul>
 </div>
