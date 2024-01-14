@@ -15,8 +15,8 @@
       </div>
       <div class="ml-2 align-self-center">
         <% if user_signed_in? %>
-          <p class="mb-1"><%= current_user.display_name %></p>
-          <p class="mb-0 text-black-50"><small>@<%= current_user.username %></small></p>
+          <p class="mb-1 text-break"><%= current_user.display_name %></p>
+          <p class="mb-0 text-black-50 text-break"><small>@<%= current_user.username %></small></p>
         <% else %>
           <p class="mb-0">ログインしてないよ</p>
         <% end %>

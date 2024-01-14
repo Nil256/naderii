@@ -17,6 +17,7 @@ class CriesController < ApplicationController
       flash[:success] = "投稿できたよ！"
       redirect_to timeline_path(@timeline.timelinename)
     else
+      @cries = @timeline.cries.order(created_at: :desc)
       render "timelines/show"
     end
   end

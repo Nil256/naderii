@@ -4,8 +4,8 @@
       <div class="card-body">
         <div class="d-flex">
           <div class="align-self-center">
-            <p class="card-title mb-0 h5"><b><%= timeline.display_name %></b></p>
-            <%= link_to timeline_path(timeline.timelinename), class: "mb-0 text-black-50 stretched-link" do %>
+            <p class="card-title mb-0 h5 text-break"><b><%= timeline.display_name %></b></p>
+            <%= link_to timeline_path(timeline.timelinename), class: "mb-0 text-black-50 text-break stretched-link" do %>
               @<%= timeline.timelinename %>
             <% end %>
           </div>

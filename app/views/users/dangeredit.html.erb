@@ -70,7 +70,7 @@
           以下のタイムラインが削除されます。
           <ul>
             <% @user.timelines.each do |timeline| %>
-              <li>@<%= timeline.timelinename %> (<%= timeline.display_name %>)</li>
+              <li class="text-break">@<%= timeline.timelinename %> (<%= timeline.display_name %>)</li>
             <% end %>
           </ul>
         </div>

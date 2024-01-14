@@ -31,9 +31,28 @@
 
       <div class="nad-list-group">
         <div class="nad-list-item p-3">
-          <%= render "layouts/text-with-user", user: @cry.user, text: show_raw_text(@cry.body) %>
+
+          <div class="d-flex flex-nowrap">
+            <div>
+              <%= attachment_image_tag @cry.user, :profile_image, :fill, 50, 50, format: "png", size: "50x50", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
+            </div>
+            <div class="ml-2 pt-1">
+              <p class="mb-0 text-break">
+                <b><%= @cry.user.display_name %></b>
+              </p>
+              <p class="mb-0">
+                <%= link_to user_path(@cry.user.username), class: "text-black-50" do %>
+                  <small>@<%= @cry.user.username %></small>
+                <% end %>
+              </p>
+            </div>
+          </div>
+          <div class="mt-2 nad-cry-body text-break">
+            <%= show_raw_text(@cry.body) %>
+          </div>
+
           <% if !@cry.is_personal %>
-          <div class="mt-3">
+          <div class="mt-3 text-break">
             <%= link_to timeline_path(@cry.timeline.timelinename), class: "d-inline-block blockquote-footer text-black-50" do %>
               <small>
                 <%= @cry.timeline.display_name %> @<%= @cry.timeline.timelinename %>

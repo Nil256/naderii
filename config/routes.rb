@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   post "/timelines/@:timelinename/follows" => "timeline_follows#create", as: "timeline_follows"
   delete "/timelines/@:timelinename/follows" => "timeline_follows#destroy"
 
-  # get 'timelines/search'
   post "/timelines/@:timelinename/transfer" => "timelines#transferrequest", as: "timeline_transfer"
   delete "/timelines/@:timelinename/transfer" => "timelines#transfercancel"
   get "/timelines/@:timelinename/edit/dangerzone" => "timelines#dangeredit", as: "dangeredit_timeline"
@@ -49,6 +48,5 @@ Rails.application.routes.draw do
   put "/timelines/@:timelinename" => "timelines#update"
   get "/timelines/followed" => "timelines#followed", as: "followed_timelines"
   get "/timelines/managed" => "timelines#managed", as: "managed_timelines"
-  # get "/timelines/search" => "timelines#search", as: "timeline_search"
   resources :timelines, only: [:index, :new, :create]
 end

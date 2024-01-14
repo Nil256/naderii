@@ -20,28 +20,6 @@ class TimelinesController < ApplicationController
     end
   end
 
-  def search
-    keyword = params[:keyword]
-    search_type = params[:search_type]
-    search_type ||= "default"
-    if !(user_signed_in?)
-      search_type = "default"
-    end
-    if search_type == "following"
-      @header = "フォロー中のタイムライン"
-      @timelines = Timeline.where(id: current_user.timeline_follows.pluck(:timeline_id), is_dummy: false).where("display_name LIKE?", "%#{keyword}%")
-    elsif search_type == "managing"
-      @header = "管理中のタイムライン"
-      @timelines = Timeline.where(user_id: current_user.id, is_dummy: false).where("display_name LIKE?", "%#{keyword}%")
-    else
-      @header = "#{keyword}の検索結果 (タイムライン)"
-      @timelines = Timeline.where(is_dummy: false).where("display_name LIKE?", "%#{keyword}%")
-      search_type = "default"
-    end
-    @search_type = search_type
-    render :index
-  end
-
   def new
     @timeline = Timeline.new
     @randomname = SecureRandom.alphanumeric(16)

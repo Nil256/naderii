@@ -45,6 +45,13 @@ label {
 
 // Bootstrapに足りないCSSで共通で使用できるもの
 
+// Flexboxの要素の最小幅をその要素のテキストの長さにする
+.nbs-flex-text-nowrap {
+  width: max-content;
+  min-width: fit-content;
+}
+
+
 .nbs-resize-none {
   resize: none;
 }
