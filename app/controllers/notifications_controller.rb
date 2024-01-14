@@ -5,11 +5,31 @@ class NotificationsController < ApplicationController
       return
     end
     @notifications = Notification.where(receive_user_id: current_user.id).order(created_at: :desc)
-    @notifications.each do |n|
-      if n.action != "TimelineTransferRequest"
-        n.update(is_checked: true)
+    @notifications.each do |notification|
+      if notification.action != "TimelineTransferRequest"
+        notification.update(is_checked: true)
       end
     end
+  end
+
+  def destroy
+    if !(user_signed_in?)
+      redirect_to root_path
+      return
+    end
+    @notifications = Notification.where(receive_user_id: current_user.id).order(created_at: :desc)
+    @notifications.each do |notification|
+      if notification.action == "TimelineTransferRequest"
+        timeline = get_transferring_timeline(notification)
+        if timeline.nil?
+          notification.destroy
+          flash[:danger] = "不正な譲渡申請が削除されました。"
+        end
+      else
+        notification.destroy
+      end
+    end
+    redirect_to notifications_path
   end
 
   def timelinetransferaccept

@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   root to: "homes#top"
 
   get "/home" => "homes#main", as: "home"
+  get "/search" => "searches#search", as: "search"
 
   resources :notifications, only: [:index]
   post "/timelinetransfer/:id" => "notifications#timelinetransferaccept", as: "response_timeline_transfer"
   delete "/timelinetransfer/:id" => "notifications#timelinetransferreject"
+  delete "/notifications" => "notifications#destroy"
 
   post "/users/@:username/follows" => "user_follows#create", as: "user_follows"
   delete "/users/@:username/follows" => "user_follows#destroy"
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   put "/users/@:username/danger" => "users#dangerupdate"
   patch "/users/@:username" => "users#update", as: "update_user"
   put "/users/@:username" => "users#update"
+  get "/users/following" => "users#following", as: "following_users"
 
   post "/cries" => "cries#privatecreate", as: "private_cries"
   post "/timelines/@:timelinename/cries" => "cries#publiccreate", as: "public_cries"
@@ -44,5 +47,8 @@ Rails.application.routes.draw do
   put "/timelines/@:timelinename/danger" => "timelines#dangerupdate"
   patch "/timelines/@:timelinename" => "timelines#update", as: "update_timeline"
   put "/timelines/@:timelinename" => "timelines#update"
+  get "/timelines/followed" => "timelines#followed", as: "followed_timelines"
+  get "/timelines/managed" => "timelines#managed", as: "managed_timelines"
+  # get "/timelines/search" => "timelines#search", as: "timeline_search"
   resources :timelines, only: [:index, :new, :create]
 end

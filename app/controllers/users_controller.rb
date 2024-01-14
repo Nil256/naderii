@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  def following
+    if !(user_signed_in?)
+      redirect_to new_user_session_path
+      return
+    end
+    @users = User.where(id: current_user.user_follows.pluck(:followed_user_id))
+  end
+
   def show
     @user = User.find_by!(username: params["username"])
     @cry = Cry.new

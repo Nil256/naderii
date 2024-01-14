@@ -1,0 +1,20 @@
+<div class="d-flex flex-wrap">
+  <% users.each do |user| %>
+    <div class="card nbs-css-timelinecard">
+      <div class="card-body">
+        <div class="d-flex">
+          <div class="">
+            <%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: "png", size: "50x50", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
+          </div>
+          <div class="align-self-center ml-2">
+            <p class="card-title mb-0 h5"><b><%= advanced_truncated(user.display_name, 20) %></b></p>
+            <%= link_to user_path(user.username), class: "mb-0 text-black-50 stretched-link" do %>
+              @<%= user.username %>
+            <% end %>
+          </div>
+        </div>
+        <p class="card-text nad-cry-body"><%= advanced_truncated(user.introduction, 40, 4) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

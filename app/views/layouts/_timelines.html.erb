@@ -1,0 +1,17 @@
+<div class="d-flex flex-wrap">
+  <% timelines.each do |timeline| %>
+    <div class="card nbs-css-timelinecard">
+      <div class="card-body">
+        <div class="d-flex">
+          <div class="align-self-center">
+            <p class="card-title mb-0 h5"><b><%= timeline.display_name %></b></p>
+            <%= link_to timeline_path(timeline.timelinename), class: "mb-0 text-black-50 stretched-link" do %>
+              @<%= timeline.timelinename %>
+            <% end %>
+          </div>
+        </div>
+        <p class="card-text"><%= advanced_truncated(timeline.introduction, 40, 4) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

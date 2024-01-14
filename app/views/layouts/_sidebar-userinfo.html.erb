@@ -27,19 +27,59 @@
       <ul class="nav flex-column">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to user_path(current_user.username), class: "nav-link" do %>
-              <i class="fas fa-user fa-lg fa-fw"></i> プロフィール
+            <% if controller_name == "users" && action_name == "show" && @user.id == current_user.id %>
+              <span class="nav-link text-muted">
+                <i class="fas fa-user fa-lg fa-fw"></i> プロフィール
+              </span>
+            <% else %>
+              <%= link_to user_path(current_user.username), class: "nav-link" do %>
+                <i class="fas fa-user fa-lg fa-fw"></i> プロフィール
+              <% end %>
             <% end %>
           </li>
           <li class="nav-item">
-            <% if controller_name != "users" || action_name != "edit" %>
-              <%= link_to edit_user_path(current_user.username), class: "nav-link" do %>
-                <i class="fas fa-user-cog fa-lg fa-fw"></i> プロフィール編集
-              <% end %>
-            <% else %>
+            <% if controller_name == "users" && action_name == "edit" %>
               <span class="nav-link text-muted">
-                <i class="fas fa-user-cog fa-lg fa-fw"></i> プロフィール編集
+                <i class="fas fa-user-edit fa-lg fa-fw"></i> プロフィール編集
               </span>
+            <% else %>
+              <%= link_to edit_user_path(current_user.username), class: "nav-link" do %>
+                <i class="fas fa-user-edit fa-lg fa-fw"></i> プロフィール編集
+              <% end %>
+            <% end %>
+          </li>
+
+          <li class="nav-item mt-4">
+            <% if controller_name == "users" && action_name == "following" %>
+              <span class="nav-link text-muted">
+                <i class="fas fa-user-check fa-lg fa-fw"></i> フォロー中のユーザー
+              </span>
+            <% else %>
+              <%= link_to following_users_path, class: "nav-link" do %>
+                <i class="fas fa-user-check fa-lg fa-fw"></i> フォロー中のユーザー
+                </span>
+              <% end %>
+            <% end %>
+          </li>
+
+          <li class="nav-item mt-4">
+            <% if controller_name == "notifications" %>
+              <span class="nav-link text-muted">
+                <i class="fas fa-bell fa-lg fa-fw"></i> 通知
+              </span>
+            <% else %>
+              <%= link_to notifications_path, class: "nav-link" do %>
+                <span class="d-flex">
+                  <span class="align-self-center">
+                    <i class="fas fa-bell fa-lg fa-fw"></i> 通知
+                  </span>
+                  <% if current_user.notifications_any? %>
+                  <span class="align-self-center ml-auto">
+                    <span class="badge badge-pill badge-primary">!</span>
+                  </span>
+                  <% end %>
+                </span>
+              <% end %>
             <% end %>
           </li>
         <% end %>

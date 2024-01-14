@@ -2,7 +2,18 @@
   <div class="row">
     <div class="col-2"></div>
     <div class="col-7 mt-3">
-      <%= render "layouts/header/common", hl: "通知" %>
+      <div class="sticky-top bg-white border-bottom mb-3">
+        <div class="d-flex">
+          <div>
+            <h3><strong>通知</strong></h3>
+          </div>
+          <div class="ml-auto">
+            <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#notificationdeletemodal">
+              通知を全部消す
+            </a>
+          </div>
+        </div>
+      </div>
 
       <div class="nad-list-group">
         <% @notifications.each do |notify| %>
@@ -32,5 +43,26 @@
       </div>
     </div>
     <div class="col-3"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="notificationdeletemodal" tabindex="-1" role="dialog" aria-labelledby="notificationdeletemodaltitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificationdeletemodaltitle">確認</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        今までの通知を全て削除します。<br>
+        タイムラインの譲渡申請は削除されません。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ちょっとまって</button>
+        <%= link_to "消す", notifications_path, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
   </div>
 </div>

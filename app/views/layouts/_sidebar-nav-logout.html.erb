@@ -1,23 +1,35 @@
 <div class="col-2 position-absolute nbs-css-sidebarnav pt-3">
   <ul class="nav flex-column">
-    <!-- ホーム -->
     <li class="nav-item">
       <h3 class="text-primary">なでりー</h3>
     </li>
+
     <li class="nav-item">
       <%= link_to root_path, class: "nav-link" do %>
         <i class="fas fa-home fa-lg fa-fw"></i> トップページ
       <% end %>
     </li>
-    <!-- タイムライン -->
+
     <li class="nav-item">
-      <% if action_name != "index" %>
+      <% if controller_name == "timelines" && action_name == "index" %>
+        <span class="nav-link text-muted">
+          <i class="fas fa-bezier-curve fa-lg fa-fw"></i> タイムライン
+        </span>
+      <% else %>
         <%= link_to timelines_path, class: "nav-link" do %>
           <i class="fas fa-bezier-curve fa-lg fa-fw"></i> タイムライン
         <% end %>
+      <% end %>
+    </li>
+
+    <li class="nav-item">
+      <% if controller_name != "searches" %>
+        <%= link_to search_path, class: "nav-link" do %>
+          <i class="fas fa-search fa-lg fa-fw"></i> 検索
+        <% end %>
       <% else %>
         <span class="nav-link text-muted">
-          <i class="fas fa-bezier-curve fa-lg fa-fw"></i> タイムライン
+          <i class="fas fa-search fa-lg fa-fw"></i> 検索
         </span>
       <% end %>
     </li>

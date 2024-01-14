@@ -1,14 +1,22 @@
 <div class="col-2 position-absolute nbs-css-sidebarnav pt-3">
   <ul class="nav flex-column">
+
     <!-- ホーム -->
     <li class="nav-item">
       <h3 class="text-primary">なでりー</h3>
     </li>
     <li class="nav-item">
-      <%= link_to home_path, class: "nav-link" do %>
-        <i class="fas fa-home fa-lg fa-fw"></i> ホーム
+      <% if controller_name == "homes" && action_name == "main" %>
+        <span class="nav-link text-muted">
+          <i class="fas fa-home fa-lg fa-fw"></i> ホーム
+        </span>
+      <% else %>
+        <%= link_to home_path, class: "nav-link" do %>
+          <i class="fas fa-home fa-lg fa-fw"></i> ホーム
+        <% end %>
       <% end %>
     </li>
+
 
     <!-- タイムライン -->
     <li class="nav-item">
@@ -24,6 +32,30 @@
 
       <ul class="nav flex-column ml-3">
         <li class="nav-item">
+          <% if controller_name == "timelines" && action_name == "followed" %>
+            <span class="nav-link text-muted">
+              <i class="fas fa-thumbtack fa-fw"></i> フォロー中
+            </span>
+          <% else %>
+            <%= link_to followed_timelines_path, class: "nav-link" do %>
+              <i class="fas fa-thumbtack fa-fw"></i> フォロー中
+            <% end %>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <% if controller_name == "timelines" && action_name == "managed" %>
+            <span class="nav-link text-muted">
+              <i class="fas fa-tasks fa-fw"></i> 管理中
+            </span>
+          <% else %>
+            <%= link_to managed_timelines_path, class: "nav-link" do %>
+              <i class="fas fa-tasks fa-fw"></i> 管理中
+            <% end %>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
           <% if controller_name == "timelines" && (action_name == "new" || action_name == "create") %>
             <span class="nav-link text-muted">
               <i class="fas fa-plus fa-fw"></i> タイムライン作成
@@ -37,27 +69,20 @@
       </ul>
     </li>
 
-    <!-- 通知 -->
-    <li class="nav-item">
-      <% if controller_name == "notifications" %>
-        <span class="nav-link text-muted">
-          <i class="fas fa-bell fa-lg fa-fw"></i> 通知
-        </span>
-      <% else %>
-        <%= link_to notifications_path, class: "nav-link" do %>
-          <span class="d-flex">
-            <span class="align-self-center">
-              <i class="fas fa-bell fa-lg fa-fw"></i> 通知
-            </span>
-            <% if current_user.notifications_any? %>
-            <span class="align-self-center ml-auto">
-              <span class="badge badge-pill badge-primary">!</span>
-            </span>
-            <% end %>
-          </span>
-        <% end %>
-      <% end %>
 
+    <!-- 検索 -->
+    <li class="nav-item">
+      <% if controller_name != "searches" %>
+        <%= link_to search_path, class: "nav-link" do %>
+          <i class="fas fa-search fa-lg fa-fw"></i> 検索
+        <% end %>
+      <% else %>
+        <span class="nav-link text-muted">
+          <i class="fas fa-search fa-lg fa-fw"></i> 検索
+        </span>
+      <% end %>
     </li>
+
+
   </ul>
 </div>
