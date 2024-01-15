@@ -1,9 +1,12 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-8 pt-3 mx-auto text-center">
-      <h1>なでりー</h1>
-      <p>「いいね」の代わりに「なでる」SNS</p>
-      <p>すごいことはなでて褒めて、悲しいことはなでて慰める<br>そんな感じです</p>
+    <div class="col-2 nbs-min-h-100vh bg-primary"></div>
+    <div class="col-4 nbs-min-h-100vh pr-5 bg-primary text-white text-center">
+      <h1 class="my-5">なでりー</h1>
+      <p>「<i class="fas fa-heart fa-fw"></i>いいね」<br>の代わりに<br>「<i class="fas fa-hand-lizard fa-fw"></i>なでる」<br>SNS</p>
+    </div>
+    <div class="col-4 nbs-min-h-100vh pl-5">
+      <p class="my-5 text-center">すごいことはなでて褒めて、<br>悲しいことはなでて慰める<br>そんな感じです</p>
       <p class="mt-2">
         <%= link_to "アカウントを作る", new_user_registration_path, class: "btn btn-primary" %>
       </p>
@@ -18,5 +21,6 @@
         <%= link_to "ちょっと覗いてみる", timelines_path, class: "btn btn-primary" %>
       </p>
     </div>
+  <div class="col-2 nbs-min-h-100vh"></div>
   </div>
 </div>

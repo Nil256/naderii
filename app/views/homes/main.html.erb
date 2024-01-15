@@ -16,9 +16,6 @@
         <%= paginate @cries %>
       </div>
 
-      <div class="<%= "nad-cryform-space" if is_available_private_cry %>">
-      </div>
-
       <% if is_available_private_cry %>
       <div class="nad-cryform bg-white py-2">
         <%= render "layouts/error/each", model: @cry, symbol: :body %>

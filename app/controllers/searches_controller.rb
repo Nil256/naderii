@@ -53,8 +53,8 @@ class SearchesController < ApplicationController
         end
       end
     end
-    @timelines.where(is_dummy: false).order(created_at: :desc)
-    @users.where(is_administrator: false).order(created_at: :desc)
-    @cries.order(created_at: :desc)
+    @timelines.where(is_dummy: false).order(created_at: :desc).limit(25)
+    @users.where(is_administrator: false).order(created_at: :desc).limit(25)
+    @cries.order(created_at: :desc).limit(25)
   end
 end
