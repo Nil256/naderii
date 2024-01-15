@@ -58,8 +58,9 @@
         </p>
       </div>
 
-      <div class=<%= "nad-cryform-space" if user_signed_in? %>>
+      <div class="<%= "nad-cryform-space" if user_signed_in? %>">
         <%= render "layouts/cries", cries: @cries, show_timeline: false, previous_page_type: "tl" %>
+        <%= paginate @cries %>
       </div>
 
       <% if user_signed_in? %>

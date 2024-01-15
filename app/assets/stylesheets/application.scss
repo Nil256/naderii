@@ -42,6 +42,13 @@ label {
   padding-inline-start: 1.5em;
 }
 
+.pagination {
+  justify-content: center;
+}
+
+.page-item.active {
+  z-index: 0;
+}
 
 // Bootstrapに足りないCSSで共通で使用できるもの
 

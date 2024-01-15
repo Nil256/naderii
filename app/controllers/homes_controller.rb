@@ -10,6 +10,7 @@ class HomesController < ApplicationController
     @cries = Cry.where(user_id: [current_user.id, *current_user.user_follows.pluck(:followed_user_id)])
          .or(Cry.where(timeline_id: current_user.timeline_follows.pluck(:timeline_id)))
          .order(created_at: :desc)
+         .page(params[:page])
     @cry = Cry.new
     dummy_timeline = Timeline.find_by(is_dummy: true)
     @can_post_private_cry = !(dummy_timeline.nil?)

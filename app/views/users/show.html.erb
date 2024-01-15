@@ -44,7 +44,8 @@
         </p>
       </div>
 
-      <%= render "layouts/cries", cries: @user.cries.order(created_at: :desc), show_timeline: true, previous_page_type: "u" %>
+      <%= render "layouts/cries", cries: @cries, show_timeline: true, previous_page_type: "u" %>
+      <%= paginate @cries %>
     </div>
     <div class="col-0 col-lg-3"></div>
   </div>

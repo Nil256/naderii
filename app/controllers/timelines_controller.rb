@@ -51,7 +51,7 @@ class TimelinesController < ApplicationController
       raise ActiveRecord::RecordNotFound.new("Couldn't find Timeline")
       return
     end
-    @cries = @timeline.cries.order(created_at: :desc)
+    @cries = @timeline.cries.order(created_at: :desc).page(params[:page])
     @cry = Cry.new
   end
 

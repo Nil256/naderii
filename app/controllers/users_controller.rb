@@ -9,7 +9,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by!(username: params["username"])
-    @cry = Cry.new
+    @cries = @user.cries.order(created_at: :desc).page(params[:page])
+    # @cry = Cry.new
   end
 
   def edit

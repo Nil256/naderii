@@ -17,7 +17,7 @@ class CriesController < ApplicationController
       flash[:success] = "投稿できたよ！"
       redirect_to timeline_path(@timeline.timelinename)
     else
-      @cries = @timeline.cries.order(created_at: :desc)
+      @cries = @timeline.cries.order(created_at: :desc).page(params[:page])
       render "timelines/show"
     end
   end
@@ -44,6 +44,7 @@ class CriesController < ApplicationController
       @cries = Cry.where(user_id: [current_user.id, *current_user.user_follows.pluck(:followed_user_id)])
            .or(Cry.where(timeline_id: current_user.timeline_follows.pluck(:timeline_id)))
            .order(created_at: :desc)
+           .page(params[:page])
       @can_post_private_cry = true
       render "homes/main"
     end

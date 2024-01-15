@@ -11,8 +11,12 @@
         </div>
       <% end %>
 
-      <div class=<%= "nad-cryform-space" if is_available_private_cry %>>
+      <div class="<%= "nad-cryform-space" if is_available_private_cry %>">
         <%= render "layouts/cries", cries: @cries, show_timeline: true, previous_page_type: "home" %>
+        <%= paginate @cries %>
+      </div>
+
+      <div class="<%= "nad-cryform-space" if is_available_private_cry %>">
       </div>
 
       <% if is_available_private_cry %>
