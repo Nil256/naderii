@@ -1,26 +1,29 @@
 <% is_timeline_admin = (user_signed_in? && @timeline.user_id == current_user.id) %>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2"></div>
-    <div class="col-7 mt-3">
-      <div class="d-flex bg-white sticky-top border-bottom pb-2 mb-2">
-        <div class="align-self-center">
-          <p class="mb-0 h5 text-break"><b><%= @timeline.display_name %></b></p>
-          <p class="mb-0 text-black-50 text-break"><small>@<%= @timeline.timelinename %></small></p>
-        </div>
-        <div class="align-self-center ml-auto d-flex">
-          <% if user_signed_in? %>
-            <div class="align-self-center nbs-flex-text-nowrap" id="timeline_follow_button_<%= @timeline.timelinename %>">
-              <%= render "layouts/button/timeline_follow", timeline: @timeline %>
-            </div>
-          <% end %>
-          <% if is_timeline_admin %>
-            <div class="align-self-center ml-3">
-              <%= link_to edit_timeline_path(@timeline.timelinename), class: "text-secondary", "title" => "編集する" do %>
-                <i class="fas fa-pen fa-lg"></i>
-              <% end %>
-            </div>
-          <% end %>
+    <div class="col-0 col-md-3 col-lg-2"></div>
+    <div class="col-12 col-md-9 col-lg-7 mt-3">
+      <div class="sticky-top bg-white border-bottom pb-2 mb-2">
+        <%= render "layouts/header-links" %>
+        <div class="d-flex">
+          <div class="align-self-center">
+            <p class="mb-0 h5 text-break"><b><%= @timeline.display_name %></b></p>
+            <p class="mb-0 text-black-50 text-break"><small>@<%= @timeline.timelinename %></small></p>
+          </div>
+          <div class="align-self-center ml-auto d-flex">
+            <% if user_signed_in? %>
+              <div class="align-self-center nbs-flex-text-nowrap" id="timeline_follow_button_<%= @timeline.timelinename %>">
+                <%= render "layouts/button/timeline_follow", timeline: @timeline %>
+              </div>
+            <% end %>
+            <% if is_timeline_admin %>
+              <div class="align-self-center ml-3">
+                <%= link_to edit_timeline_path(@timeline.timelinename), class: "text-secondary", "title" => "編集する" do %>
+                  <i class="fas fa-pen fa-lg"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
 
@@ -78,6 +81,6 @@
       </div>
       <% end %>
     </div>
-    <div class="col-3"></div>
+    <div class="col-0 col-lg-3"></div>
   </div>
 </div>

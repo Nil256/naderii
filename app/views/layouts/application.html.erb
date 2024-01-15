@@ -15,14 +15,18 @@
     </main>
     <% if controller_name != "homes" || action_name == "main" %>
     <nav>
-      <div class="container-fluid nbs-css-navcontainer">
+      <div class="container-fluid nad-nav-container">
         <div class="row position-relative">
-          <% if user_signed_in? %>
-            <%= render "layouts/sidebar-nav-login" %>
-          <% else %>
-            <%= render "layouts/sidebar-nav-logout" %>
-          <% end %>
-          <%= render "layouts/sidebar-userinfo" %>
+          <div class="d-none d-md-block">
+            <% if user_signed_in? %>
+              <%= render "layouts/sidebar-nav-login" %>
+            <% else %>
+              <%= render "layouts/sidebar-nav-logout" %>
+            <% end %>
+          </div>
+          <div class="d-none d-lg-block">
+            <%= render "layouts/sidebar-userinfo" %>
+          </div>
         </div>
       </div>
       <%= render "layouts/modallogout" %>

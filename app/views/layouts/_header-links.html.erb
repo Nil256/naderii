@@ -1,0 +1,127 @@
+<div class="d-block d-md-none nad-nav-header px-4 pb-2 border-bottom mb-2">
+  <div class="d-flex">
+    <div class="flex-fill text-center">
+      <% if !(user_signed_in?) %>
+        <%= link_to root_path do %>
+          <i class="fas fa-home fa-lg"></i>
+        <% end %>
+      <% elsif controller_name == "homes" && action_name == "main" %>
+        <span class="text-muted">
+          <i class="fas fa-home fa-lg"></i>
+        </span>
+      <% else %>
+        <%= link_to home_path do %>
+          <i class="fas fa-home fa-lg"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="flex-fill text-center dropdown">
+      <% if !(user_signed_in?) %>
+        <% if controller_name == "timelines" && action_name == "index" %>
+          <span class="text-muted">
+            <i class="fas fa-bezier-curve fa-lg"></i>
+          </span>
+        <% else %>
+          <%= link_to timelines_path do %>
+            <i class="fas fa-bezier-curve fa-lg"></i>
+          <% end %>
+        <% end %>
+      <% else %>
+        <a id="headerlinktimeline" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bezier-curve fa-lg"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="headerlinktimeline">
+          <% unless controller_name == "timelines" && action_name == "index" %>
+            <%= link_to timelines_path, class: "dropdown-item" do %>
+              <i class="fas fa-bezier-curve fa-fw"></i> タイムライン
+            <% end %>
+          <% end %>
+          <% unless controller_name == "timelines" && action_name == "followed" %>
+            <%= link_to followed_timelines_path, class: "dropdown-item" do %>
+              <i class="fas fa-thumbtack fa-fw"></i> フォロー中
+            <% end %>
+          <% end %>
+          <% unless controller_name == "timelines" && action_name == "managed" %>
+            <%= link_to managed_timelines_path, class: "dropdown-item" do %>
+              <i class="fas fa-tasks fa-fw"></i> 管理中
+            <% end %>
+          <% end %>
+          <% unless controller_name == "timelines" && (action_name == "new" || action_name == "create") %>
+            <%= link_to new_timeline_path, class: "dropdown-item" do %>
+              <i class="fas fa-plus fa-fw"></i> タイムライン作成
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="flex-fill text-center">
+      <% if controller_name == "searches" %>
+        <span class="text-muted">
+          <i class="fas fa-search fa-lg"></i>
+        </span>
+      <% else %>
+        <%= link_to search_path do %>
+          <i class="fas fa-search fa-lg"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <% if user_signed_in? %>
+    <div class="flex-fill text-center dropdown">
+      <% if controller_name == "notifications" %>
+        <span class="text-muted">
+          <i class="fas fa-bell fa-lg"></i>
+        </span>
+      <% else %>
+        <%= link_to notifications_path do %>
+          <i class="fas fa-bell fa-lg"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="flex-fill text-center dropdown">
+      <a id="headerlinkuser" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <% if user_signed_in? %>
+          <%= attachment_image_tag current_user, :profile_image, :fill, 25, 25, format: "png", size: "25x25", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
+        <% else %>
+          <i class="fas fa-user fa-lg"></i>
+        <% end %>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="headerlinkuser">
+        <% if !(user_signed_in?) %>
+          <% unless controller_name == "registrations" %>
+            <%= link_to new_user_registration_path, class: "dropdown-item" do %>
+              <i class="fas fa-user-plus fa-fw"></i> アカウント作成
+            <% end %>
+          <% end %>
+          <% unless controller_name == "sessions" %>
+            <%= link_to new_user_session_path, class: "dropdown-item" do %>
+              <i class="fas fa-sign-in-alt fa-fw"></i> ログイン
+            <% end %>
+          <% end %>
+        <% else %>
+          <% unless controller_name == "users" && action_name == "show" && @user.id == current_user.id %>
+            <%= link_to user_path(current_user.username), class: "dropdown-item" do %>
+              <i class="fas fa-user fa-fw"></i> プロフィール
+            <% end %>
+          <% end %>
+          <% unless controller_name == "users" && action_name == "edit" %>
+            <%= link_to edit_user_path(current_user.username), class: "dropdown-item" do %>
+              <i class="fas fa-user-edit fa-fw"></i> プロフィール編集
+            <% end %>
+          <% end %>
+          <div class="dropdown-divider"></div>
+          <% unless controller_name == "users" && action_name == "following" %>
+            <%= link_to following_users_path, class: "dropdown-item" do %>
+              <i class="fas fa-user-check fa-fw"></i> フォロー中のユーザー
+              </span>
+            <% end %>
+            <div class="dropdown-divider"></div>
+          <% end %>
+          <a href="#" class="dropdown-item text-danger" data-toggle="modal" data-target="#logoutmodal">
+            <i class="fas fa-sign-out-alt fa-fw"></i> ログアウト
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2"></div>
-    <div class="col-7 mt-3">
+    <div class="col-0 col-md-3 col-lg-2"></div>
+    <div class="col-12 col-md-9 col-lg-7 mt-3">
       <%= render 'layouts/header/common', hl: "検索" %>
-      <div>
+      <div class="">
         <%= form_with url: search_path, method: :get, local: true do |f| %>
           <div class="d-flex">
             <div class="form-group mb-0 mr-1">
@@ -21,7 +21,6 @@
             </div>
           </div>
         <% end %>
-        <p class="text-black-50">※ 「全て」での検索は時間がかかる可能性があります</p>
       </div>
       <% if !(@word.blank?) %>
         <% if @target == "all" || @target == "timeline" %>
@@ -68,6 +67,6 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-3"></div>
+    <div class="col-0 col-lg-3"></div>
   </div>
 </div>

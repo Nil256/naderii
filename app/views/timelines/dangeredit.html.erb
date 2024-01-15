@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2"></div>
-    <div class="col-7 mt-3">
+    <div class="col-0 col-md-3 col-lg-2"></div>
+    <div class="col-12 col-md-9 col-lg-7 mt-3">
       <%= render "layouts/header/edit", hl: "タイムライン設定", id: @timeline.timelinename, link: edit_timeline_path(@timeline.timelinename) %>
       <p class="alert alert-danger mb-4">
         以下の設定は危険性を伴う設定(破壊的な設定)があります。<br>
@@ -147,7 +147,7 @@
         <%= link_to "タイムライン編集に戻る", edit_timeline_path(@timeline.timelinename), class: "btn btn-success" %>
       </div>
     </div>
-    <div class="col-3"></div>
+    <div class="col-0 col-lg-3"></div>
   </div>
 </div>
 <div class="modal fade" id="timelinedeletemodal" tabindex="-1" role="dialog" aria-labelledby="timelinedeletemodaltitle" aria-hidden="true">

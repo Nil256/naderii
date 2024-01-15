@@ -1,4 +1,4 @@
-<div class="col-2 position-absolute nbs-css-sidebarnav pt-3">
+<div class="col-md-3 col-lg-2 position-absolute nad-sidebar-nav pt-3">
   <ul class="nav flex-column">
     <li class="nav-item">
       <h3 class="text-primary">なでりー</h3>
@@ -34,4 +34,34 @@
       <% end %>
     </li>
   </ul>
+
+
+  <div class="d-none d-md-block d-lg-none">
+    <div class="position-absolute nad-sidebar-bottom nad-list-group mb-0">
+      <div class="">
+        <div class="d-flex bg-white nad-list-item mx-2 dropdown">
+          <div class="align-self-center">
+            <%= image_tag("logout_user_profile.png", size: "50x50", class: "rounded-circle") %>
+          </div>
+          <div class="ml-2 align-self-center">
+            <p class="mb-0">ログインしてないよ</p>
+          </div>
+          <a id="userlinkdropdown" href="#" class="dropdown-toggle stretched-link text-white d-inlink-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu" aria-labelledby="userlinkdropdown">
+
+            <% unless controller_name == "registrations" %>
+              <%= link_to new_user_registration_path, class: "dropdown-item" do %>
+                <i class="fas fa-user-plus fa-lg fa-fw"></i> アカウント作成
+              <% end %>
+            <% end %>
+            <% unless controller_name == "sessions" %>
+              <%= link_to new_user_session_path, class: "dropdown-item" do %>
+                <i class="fas fa-sign-in-alt fa-lg fa-fw"></i> ログイン
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

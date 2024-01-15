@@ -45,17 +45,19 @@ label {
 
 // Bootstrapに足りないCSSで共通で使用できるもの
 
+.nbs-invisible {
+  visibility: hidden;
+}
+
 // Flexboxの要素の最小幅をその要素のテキストの長さにする
 .nbs-flex-text-nowrap {
   width: max-content;
   min-width: fit-content;
 }
 
-
 .nbs-resize-none {
   resize: none;
 }
-
 
 .nbs-cursor-grab {
   cursor: grab;
@@ -87,13 +89,13 @@ label {
 // ユニークなCSSを持っている部品
 
 // サイドバー
-.nbs-css-navcontainer {
+.nad-nav-container {
   position: fixed;
   top: 0;
   left: 0;
 }
 
-.nbs-css-sidebarnav {
+.nad-sidebar-nav {
   top: 0;
   left: 0;
   min-height: 100vh;
@@ -118,7 +120,7 @@ label {
   // height: calc(100vh - 3em);
 }
 
-.nbs-css-sidebaruser-danger-links {
+.nad-sidebar-bottom {
   right: 0;
   bottom: 1em;
   left: 0;
@@ -126,6 +128,10 @@ label {
   // bottom: 2em;
 }
 
+// サイドバー (ヘッダーver)
+.nad-nav-header {
+  background-color: #fffcff;
+}
 
 // cry
 .nad-cry-body {

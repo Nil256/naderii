@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2"></div>
-    <div class="col-7 mt-3">
+    <div class="col-0 col-md-3 col-lg-2"></div>
+    <div class="col-12 col-md-9 col-lg-7 mt-3">
       <%= render "layouts/header/edit", hl: "タイムライン編集", id: @timeline.timelinename, link: timeline_path(@timeline.timelinename) %>
       <%= form_with model: @timeline, url: update_timeline_path(@timeline.timelinename), local: true do |f| %>
         <div class="form-group">
@@ -19,12 +19,12 @@
           <%= f.submit "これにする", class: "btn btn-primary" %>
         </div>
       <% end %>
-      <div class="mt-5">
+      <div class="mt-5 mb-3">
         <%= link_to dangeredit_timeline_path, class: "text-danger" do %>
           <small>危険性のある設定を開く</small>
         <% end %>
       </div>
     </div>
-    <div class="col-3"></div>
+    <div class="col-0 col-lg-3"></div>
   </div>
 </div>
