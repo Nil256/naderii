@@ -7,7 +7,7 @@
         <%= render "layouts/header-links" %>
         <div class="d-flex">
           <div class="align-self-center">
-            <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "png", size: "100x100", fallback: "user_profile_default", class: "rounded-circle nbs-cursor-grab" %>
+            <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: "png", size: "100x100", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
           </div>
           <div class="ml-2 align-self-center">
             <p class="mb-0 h5 text-break"><b><%= @user.display_name %></b></p>
