@@ -71,8 +71,10 @@
                 <span id="pet_button_<%= @cry.id %>">
                   <%= render "layouts/button/pet", cry: @cry %>
                 </span>
-                <% if !(user_signed_in?) || @cry.user_id == current_user.id %>
+                <% if !(user_signed_in?) %>
                   <span class="nad-cry-link-disabled">なで</span>
+                <% elsif @cry.user_id == current_user.id %>
+                  <a href="#" data-toggle="modal" data-target="#crypetnummodal">なで</a>
                 <% else %>
                   <span class="nad-cry-link-nade">なで</span>
                 <% end %>
@@ -96,6 +98,40 @@
     <div class="col-0 col-lg-3"></div>
   </div>
 </div>
+<% if is_cried_user %>
+  <div class="modal fade" id="crypetnummodal" tabindex="-1" role="dialog" aria-labelledby="crypetnummodaltitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="crypetnummodaltitle">なでてくれた人たち</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="nad-list-group">
+            <% @cry.pets.each do |pet| %>
+              <div class="nad-list-item">
+                <div class="d-flex">
+                  <div class="align-self-center">
+                    <%= attachment_image_tag pet.user, :profile_image, :fill, 40, 40, format: "png", size: "40x40", fallback: "user_profile_default.png", class: "rounded-circle nad-cursor-grab" %>
+                  </div>
+                  <div class="align-self-center ml-2">
+                    <p class="mb-0 text-break"><%= pet.user.display_name %></p>
+                    <p class="mb-0 text-black-50 text-break"><small>@<%= pet.user.username %></small></p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 <% if is_cried_user %>
 <div class="modal fade" id="crydeletemodal" tabindex="-1" role="dialog" aria-labelledby="crydeletemodaltitle" aria-hidden="true">
 <% else %>

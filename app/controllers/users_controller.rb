@@ -4,11 +4,15 @@ class UsersController < ApplicationController
       redirect_to new_user_session_path
       return
     end
-    @users = User.where(id: current_user.user_follows.pluck(:followed_user_id))
+    @users = User.where(id: current_user.user_follows.pluck(:followed_user_id), is_administrator: false)
   end
 
   def show
     @user = User.find_by!(username: params["username"])
+    if @user.is_administrator && @user.id != current_user.id
+      raise ActiveRecord::RecordNotFound.new("Couldn't find User")
+      return
+    end
     @cries = @user.cries.order(created_at: :desc).page(params[:page])
     # @cry = Cry.new
   end
