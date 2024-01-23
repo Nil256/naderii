@@ -110,17 +110,23 @@
         </div>
         <div class="modal-body">
           <div class="nad-list-group">
-            <% @cry.pets.each do |pet| %>
-              <div class="nad-list-item">
-                <div class="d-flex">
-                  <div class="align-self-center">
-                    <%= attachment_image_tag pet.user, :profile_image, :fill, 40, 40, format: "png", size: "40x40", fallback: "user_profile_default.png", class: "rounded-circle nad-cursor-grab" %>
-                  </div>
-                  <div class="align-self-center ml-2">
-                    <p class="mb-0 text-break"><%= pet.user.display_name %></p>
-                    <p class="mb-0 text-black-50 text-break"><small>@<%= pet.user.username %></small></p>
+            <% if @cry.pets.count > 0 %>
+              <% @cry.pets.each do |pet| %>
+                <div class="nad-list-item">
+                  <div class="d-flex">
+                    <div class="align-self-center">
+                      <%= attachment_image_tag pet.user, :profile_image, :fill, 40, 40, format: "png", size: "40x40", fallback: "user_profile_default.png", class: "rounded-circle nad-cursor-grab" %>
+                    </div>
+                    <div class="align-self-center ml-2">
+                      <p class="mb-0 text-break"><%= pet.user.display_name %></p>
+                      <p class="mb-0 text-black-50 text-break"><small>@<%= pet.user.username %></small></p>
+                    </div>
                   </div>
                 </div>
+              <% end %>
+            <% else %>
+              <div class="nad-list-item">
+                <p>のんびりゆっくりね</p>
               </div>
             <% end %>
           </div>

@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-0 col-md-3 col-lg-2"></div>
+    <div class="col-12 col-md-9 col-lg-7 mt-3">
+      <%= render "layouts/header/common", hl: "ホーム" %>
+
+      <p class="h5"><b>なでりーの運用に必要な準備の確認</b></p>
+      <div class="mb-5">
+        <p>
+          <span class="text-success"><i class="far fa-check-square fa-lg"></i></span> <span class="text-black-50"><b>管理者ユーザーを設定する</b></span><br>
+          <% if @timeline.nil? %>
+            <span class="text-secondary"><i class="far fa-square fa-lg"></i></span> <b>ホーム投稿用のタイムラインを作成し、設定する</b>
+          <% else %>
+            <span class="text-success"><i class="far fa-check-square fa-lg"></i></span> <span class="text-black-50"><b>ホーム投稿用のタイムラインを作成し、設定する</b></span>
+          <% end %>
+        </p>
+        <% if @timeline.nil? %>
+          <p>
+            現時点ではホーム投稿ができません。<br>
+            管理者ユーザー(このユーザー)で、タイムラインを作成し、コンソールなどからホーム投稿用のタイムラインを設定します。<br>
+            作成するタイムラインのタイムラインネームは"private"が推奨されています。<br>
+            <a href="https://github.com/Nil256/naderii" target="_blank" rel="noreferrer noopener">設定の方法については、Githubを確認してください。</a>
+          </p>
+        <% else %>
+          <p>
+            なでりー運用のための準備は完了しました。
+          </p>
+        <% end %>
+      </div>
+
+      <p class="h5"><b>管理者ユーザーの注意点</b></p>
+      <div class="mb-5">
+        <p>
+          <ul class="pl-4 mb-1">
+            <li>管理者ユーザーは１ユーザーのみです。複数のユーザーに設定しないでください。</li>
+            <li>ホーム投稿用のタイムラインは１つのみです。複数のタイムラインに設定しないでください。</li>
+            <li>管理者ユーザーで投稿やなで、フォローなどを行わないでください。</li>
+          </ul>
+          管理者ユーザーはあくまでシステムに必要な仮ユーザーです。上記を違約した場合、動作の保証はしません。
+        </p>
+        <p>
+          また管理者ユーザーは次のように表示のために使用されることがあります。
+          <ul class="pl-4 mb-1">
+            <li>管理者ユーザーが管理しているタイムラインは、通常のユーザーも使用できますが、管理者は「システムまたは削除により未定」として表示されます。</li>
+            <li>管理者ユーザーからの通知はシステムメッセージとして表示されます。</li>
+            <li>さらに通知の送ったユーザーと受け取りユーザーが管理者である場合、現時点ではお知らせとして機能します。</li>
+          </ul>
+        </p>
+        <p>プロフィールの編集などは行えますが、管理者ユーザーは、通常のユーザーから見ることはできません。</p>
+        <p>管理者ユーザーの特権は現時点で特に存在しません。</p>
+      </div>
+
+
+      <p class="h5"><b>ホーム投稿用のタイムラインの注意点</b></p>
+      <div class="mb-5">
+        <p>
+          ホーム投稿用のタイムラインは、管理者ユーザーであってもタイムラインのページを開くことはできません。<br>
+          (そのタイムラインの管理者であれば、URLから編集ページを開くことはできます。)
+        </p>
+      </div>
+
+    </div>
+    <div class="col-0 col-lg-3"></div>
+  </div>
+</div>

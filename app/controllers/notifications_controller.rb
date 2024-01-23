@@ -50,7 +50,11 @@ class NotificationsController < ApplicationController
         transfer.destroy
       end
       Notification.new(send_user_id: current_user.id, receive_user_id: notification.send_user_id, action: "TimelineTransferAccept", timeline_id: notification.timeline_id).save
-      Notification.new(send_user_id: current_user.id, receive_user_id: current_user.id, action: "TimelineTransferred", timeline_id: notification.timeline_id).save
+      _send = User.find_by(is_administrator: true)
+      if _send.nil?
+        _send = current_user
+      end
+      Notification.new(send_user_id: _send.id, receive_user_id: current_user.id, action: "TimelineTransferred", timeline_id: notification.timeline_id).save
       flash[:success] = "タイムラインの譲渡が完了しました。"
     end
     redirect_to notifications_path

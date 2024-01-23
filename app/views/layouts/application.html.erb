@@ -14,7 +14,7 @@
     <main>
       <%= yield %>
     </main>
-    <% if controller_name != "homes" || action_name == "main" %>
+    <% if controller_name != "homes" || (action_name == "main" || action_name == "adminimain") %>
     <nav>
       <div class="container-fluid nad-nav-container">
         <div class="row position-relative">

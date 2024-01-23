@@ -27,7 +27,7 @@ $info: #00afff;
 // text-muted: 無効のリンク
 
 
-// デフォルトの上書き
+// デフォルトの上書き //
 
 label {
   font-weight: bold;
@@ -50,7 +50,7 @@ label {
   z-index: 0;
 }
 
-// Bootstrapに足りないCSSで共通で使用できるもの
+// Bootstrapに足りないCSSで共通で使用できるもの //
 
 .nbs-invisible {
   visibility: hidden;
@@ -75,7 +75,8 @@ label {
 }
 
 
-// なでりー専用共通部品
+// なでりー専用共通部品 //
+
 .nad-list-group {
   margin-bottom: 15px;
 }
@@ -97,7 +98,7 @@ label {
 }
 
 
-// ユニークなCSSを持っている部品
+// ユニークなCSSを持っている部品 //
 
 // サイドバー
 .nad-nav-container {

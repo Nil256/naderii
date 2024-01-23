@@ -5,7 +5,7 @@
         <%= link_to root_path do %>
           <i class="fas fa-home fa-lg"></i>
         <% end %>
-      <% elsif controller_name == "homes" && action_name == "main" %>
+      <% elsif controller_name == "homes" && (action_name == "main" || action_name == "adminimain") %>
         <span class="text-muted">
           <i class="fas fa-home fa-lg"></i>
         </span>

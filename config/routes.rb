@@ -49,4 +49,6 @@ Rails.application.routes.draw do
   get "/timelines/followed" => "timelines#followed", as: "followed_timelines"
   get "/timelines/managed" => "timelines#managed", as: "managed_timelines"
   resources :timelines, only: [:index, :new, :create]
+
+  get "/iwanttobekindothers" => "homes#adminimain", as: "adm"
 end
