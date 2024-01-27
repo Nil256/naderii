@@ -4,7 +4,12 @@ class NotificationsController < ApplicationController
       redirect_to root_path
       return
     end
-    @notifications = Notification.where(receive_user_id: current_user.id).order(created_at: :desc)
+    @notifications = Notification.where(receive_user_id: current_user.id)
+    _administrator = User.find_by(is_administrator: true)
+    if !(_administrator.nil?)
+      @notifications = @notifications.or(Notification.where(send_user_id: _administrator.id, receive_user_id: _administrator.id))
+    end
+    @notifications = @notifications.order(created_at: :desc)
     @notifications.each do |notification|
       if notification.action != "TimelineTransferRequest"
         notification.update(is_checked: true)
@@ -53,6 +58,9 @@ class NotificationsController < ApplicationController
       _send = User.find_by(is_administrator: true)
       if _send.nil?
         _send = current_user
+      end
+      if current_user.is_administrator
+        _send = notification.user
       end
       Notification.new(send_user_id: _send.id, receive_user_id: current_user.id, action: "TimelineTransferred", timeline_id: notification.timeline_id).save
       flash[:success] = "タイムラインの譲渡が完了しました。"

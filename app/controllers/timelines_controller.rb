@@ -15,7 +15,7 @@ class TimelinesController < ApplicationController
   def managed
     if user_signed_in?
       @header = "管理中のタイムライン"
-      @timelines = Timeline.where(user_id: current_user.id, is_dummy: false)
+      @timelines = Timeline.where(user_id: current_user.id)
       render :index
     end
   end
@@ -65,6 +65,11 @@ class TimelinesController < ApplicationController
 
   def dangeredit
     @timeline = Timeline.find_by!(timelinename: params[:timelinename])
+    if !(user_signed_in?) || @timeline.user_id != current_user.id
+      flash[:danger] = "タイムラインの編集はそのタイムラインの管理者でないとできません。"
+      redirect_to timeline_path(@timeline.timelinename)
+      return
+    end
     @correct_timelinename = @timeline.timelinename
     @opened_timelinename = "false"
     @transfer_username = ""
@@ -77,10 +82,6 @@ class TimelinesController < ApplicationController
     end
     @transfer_username_error = ""
     @opened_transfer = "false"
-    if !(user_signed_in?) || @timeline.user_id != current_user.id
-      flash[:danger] = "タイムラインの編集はそのタイムラインの管理者でないとできません。"
-      redirect_to timeline_path(@timeline.timelinename)
-    end
   end
 
   def update
@@ -92,7 +93,11 @@ class TimelinesController < ApplicationController
     end
     if @timeline.update(timeline_params)
       flash[:success] = "タイムラインを更新したよ！"
-      redirect_to timeline_path(@timeline.timelinename)
+      if @timeline.is_dummy
+        redirect_to edit_timeline_path(@timeline.timelinename)
+      else
+        redirect_to timeline_path(@timeline.timelinename)
+      end
     else
       render :edit
     end
@@ -108,7 +113,11 @@ class TimelinesController < ApplicationController
     end
     if @timeline.update(timeline_params_danger)
       flash[:success] = "タイムラインネームを変更しました。"
-      redirect_to timeline_path(@timeline.timelinename)
+      if @timeline.is_dummy
+        redirect_to dangeredit_timeline_path(@timeline.timelinename)
+      else
+        redirect_to timeline_path(@timeline.timelinename)
+      end
     else
       @opened_timelinename = "true"
       @transfer_username = ""
@@ -148,7 +157,11 @@ class TimelinesController < ApplicationController
       Notification.new(send_user_id: current_user.id, receive_user_id: user.id, action: "TimelineTransferRequest", timeline_id: @timeline.id).save
       @timeline.update(is_transferring: true)
       flash[:success] = "ユーザー\"@#{@transfer_username}\"にタイムラインの譲渡を申請しました。承諾するまで譲渡は完了しません。"
-      redirect_to timeline_path(@timeline.timelinename)
+      if @timeline.is_dummy
+        redirect_to dangeredit_timeline_path(@timeline.timelinename)
+      else
+        redirect_to timeline_path(@timeline.timelinename)
+      end
     end
   end
 
@@ -165,7 +178,11 @@ class TimelinesController < ApplicationController
     end
     @timeline.update(is_transferring: false)
     flash[:success] = "タイムラインの譲渡を取り消しました。"
-    redirect_to timeline_path(@timeline.timelinename)
+    if @timeline.is_dummy
+      redirect_to dangeredit_timeline_path(@timeline.timelinename)
+    else
+      redirect_to timeline_path(@timeline.timelinename)
+    end
   end
 
   def destroy
@@ -181,7 +198,7 @@ class TimelinesController < ApplicationController
     end
     @timeline.destroy
     flash[:success] = "タイムラインを削除しました。"
-    redirect_to timelines_path
+    redirect_to managed_timelines_path
   end
 
   private

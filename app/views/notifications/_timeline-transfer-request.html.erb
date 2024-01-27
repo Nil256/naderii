@@ -1,5 +1,9 @@
-    <%= link_to user_path(notification.user.username) do %>
-      <%= notification.user.display_name %><span class="text-body">さん</span><!--
+    <% if !notification.user.is_administrator %>
+      <%= link_to user_path(notification.user.username) do %>
+        <%= notification.user.display_name %><span class="text-body">さん</span><!--
+   --><% end %><!--
+ --><% else %><!--
+   -->管理者<!--
  --><% end %><!--
  -->からタイムライン<!--
  --><%= link_to timeline_path(notification.timeline.timelinename) do %><!--

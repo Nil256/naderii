@@ -23,6 +23,7 @@
             <div class="d-flex mt-2">
               <div class="">
                 <% if notify.user.is_administrator %>
+                  <div class="nad-icon-placeholder-40"></div>
                 <% else %>
                   <%= attachment_image_tag notify.user, :profile_image, :fill, 40, 40, format: "png", size: "40x40", fallback: "user_profile_default.png", class: "rounded-circle nbs-cursor-grab" %>
                 <% end %>
