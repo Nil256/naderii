@@ -4,9 +4,14 @@
       <div class="card-body">
         <div class="d-flex">
           <div class="align-self-center">
-            <p class="card-title mb-0 h5 text-break"><b><%= timeline.display_name %></b></p>
-            <%= link_to timeline_path(timeline.timelinename), class: "mb-0 text-black-50 text-break stretched-link" do %>
-              @<%= timeline.timelinename %>
+            <% if timeline.is_dummy %>
+              <p class="card-title mb-0 h5 text-primary text-break"><b><%= timeline.display_name %></b></p>
+              <span class="mb-0 text-black-50 text-break">@<%= timeline.timelinename %></span>
+            <% else %>
+              <p class="card-title mb-0 h5 text-break"><b><%= timeline.display_name %></b></p>
+              <%= link_to timeline_path(timeline.timelinename), class: "mb-0 text-black-50 text-break stretched-link" do %>
+                @<%= timeline.timelinename %>
+              <% end %>
             <% end %>
           </div>
         </div>

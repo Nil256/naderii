@@ -52,34 +52,37 @@
       </div>
       <div class="collapse" id="userdelete">
         <h3>ユーザーの削除</h3>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger mb-1">
           ユーザーを削除します。<br>
           ユーザーを削除すると以下のデータも同様に削除されます。
           <ul>
             <li>今まで投稿してきた全ての投稿</li>
-            <li>作成したタイムライン</li>
+            <li>管理中のタイムライン</li>
+            <li>管理中のタイムラインの投稿</li>
             <li>フォロー/フォロワー</li>
             <li>なで/なでられ</li>
           </ul>
           <b>ユーザーの復元はできません。</b><br>
         </div>
         <div class="alert alert-danger">
-          <b>作成したタイムラインも同様に削除されます。</b><br>
+          <b>管理中のタイムラインも同様に削除されます。</b><br>
           <b>タイムラインの管理者権限は他のユーザーまたはなでりーの管理者に譲渡できます。</b><br>
           管理者権限を譲渡した場合は、タイムラインの削除は行われません。<br>
-          以下のタイムラインが削除されます。
-          <ul>
-            <% @user.timelines.each do |timeline| %>
-              <li class="text-break">@<%= timeline.timelinename %> (<%= timeline.display_name %>)</li>
-            <% end %>
-          </ul>
         </div>
 
-        <div>
-          <p class="btn btn-secondary mb-0">作成した全タイムラインを管理者に譲渡してユーザーを削除する</p>
-        </div>
-        <div class="mt-1">
-          <p class="btn btn-secondary mt-1">ユーザーを削除する</p>
+        <!--
+        <% if @can_delete_with_transfer %>
+          <div>
+            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#userdeleteandtransfermodal">
+              作成した全タイムラインを管理者に譲渡してユーザーを削除する
+            </a>
+          </div>
+        <% end %>
+        -->
+        <div class="mt-2">
+          <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#userdeletemodal">
+            ユーザーを削除する
+          </a>
         </div>
       </div>
 
@@ -90,3 +93,69 @@
     <div class="col-0 col-lg-3"></div>
   </div>
 </div>
+<div class="modal fade" id="userdeletemodal" tabindex="-1" role="dialog" aria-labelledby="userdeletemodaltitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userdeletemodaltitle">ユーザーの削除</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>@<%= @user.username %>を削除します。</p>
+        <div class="alert alert-danger">
+          ユーザーを削除すると以下のデータも同様に削除されます。
+          <ul>
+            <li>今まで投稿してきた全ての投稿</li>
+            <li>管理中のタイムライン</li>
+            <li>管理中のタイムラインの投稿</li>
+            <li>フォロー/フォロワー</li>
+            <li>なで/なでられ</li>
+          </ul>
+          <b>ユーザーの復元はできません。</b><br>
+        </div>
+        <p>よろしいですか？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ちょっとまって</button>
+        <%= link_to "削除する", destroy_user_path, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<div class="modal fade" id="userdeleteandtransfermodal" tabindex="-1" role="dialog" aria-labelledby="userdeleteandtransfermodaltitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userdeleteandtransfermodaltitle">ユーザーの削除</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>@<%= @user.username %>を削除します。</p>
+        <div class="alert alert-danger">
+          ユーザーを削除すると以下のデータも同様に削除されます。
+          <ul>
+            <li>今まで投稿してきた全ての投稿</li>
+            <li>フォロー/フォロワー</li>
+            <li>なで/なでられ</li>
+          </ul>
+          <b>ユーザーの復元はできません。</b><br>
+        </div>
+        <div class="alert alert-info">
+          管理しているタイムラインは全て管理者に譲渡します。<br>
+          譲渡以降、管理者以外のユーザーがタイムラインの管理者になる可能性もあります。
+        </div>
+        <p>よろしいですか？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ちょっとまって</button>
+        <%= link_to "削除する", destroy_user_path, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+-->

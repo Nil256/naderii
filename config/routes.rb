@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get "/users/@:username/edit/dangerzone" => "users#dangeredit", as: "dangeredit_user"
   get "/users/@:username/edit" => "users#edit", as: "edit_user"
+  #delete "/users/@:username/delete/aftertransfertl" => "users#destroywithtransfertl", as: "destroy_user_and_timeline_transferring"
+  delete "/users/@:username/delete" => "users#destroy", as: "destroy_user"
   get "/users/@:username" => "users#show", as: "user"
   patch "/users/@:username/danger" => "users#dangerupdate", as: "dangerupdate_user"
   put "/users/@:username/danger" => "users#dangerupdate"

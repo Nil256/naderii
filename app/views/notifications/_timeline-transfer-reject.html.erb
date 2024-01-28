@@ -2,6 +2,8 @@
       <%= link_to user_path(notification.user.username) do %>
         <%= notification.user.display_name %><span class="text-body">さん</span><!--
    --><% end %><!--
+ --><% elsif notification.additional_messages.present? %><!--
+   -->@<%= notification.additional_messages %>さん<!--
  --><% else %><!--
    -->管理者<!--
  --><% end %><!--
