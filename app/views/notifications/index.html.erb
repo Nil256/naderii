@@ -29,7 +29,9 @@
                 <% end %>
               </div>
               <div class="ml-2">
-                <% if notify.action == "TimelineTransferRequest" %>
+                <% if notify.action == "Notify" %>
+                  <%= render "notifications/notify", notification: notify %>
+                <% elsif notify.action == "TimelineTransferRequest" %>
                   <%= render "notifications/timeline-transfer-request", notification: notify %>
                 <% elsif notify.action == "TimelineTransferAccept" %>
                   <%= render "notifications/timeline-transfer-accept", notification: notify %>

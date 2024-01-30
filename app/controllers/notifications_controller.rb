@@ -5,9 +5,9 @@ class NotificationsController < ApplicationController
       return
     end
     @notifications = Notification.where(receive_user_id: current_user.id)
-    _administrator = User.find_by(is_administrator: true)
-    if !(_administrator.nil?)
-      @notifications = @notifications.or(Notification.where(send_user_id: _administrator.id, receive_user_id: _administrator.id))
+    _systemuser = User.find_by(is_administrator: true)
+    if !(_systemuser.nil?)
+      @notifications = @notifications.or(Notification.where(send_user_id: _systemuser.id, receive_user_id: _systemuser.id))
     end
     @notifications = @notifications.order(created_at: :desc)
     @notifications.each do |notification|
