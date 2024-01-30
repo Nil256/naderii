@@ -17,5 +17,7 @@ module Naderii
     # the framework and any gems in your application.
 
     config.i18n.default_locale = :ja
+
+    config.naderii_version = "2024.01.0"
   end
 end
