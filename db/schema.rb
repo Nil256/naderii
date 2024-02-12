@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_12_095720) do
+ActiveRecord::Schema.define(version: 2024_02_12_005259) do
 
   create_table "cries", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -58,9 +58,23 @@ ActiveRecord::Schema.define(version: 2024_01_12_095720) do
     t.index ["timelinename"], name: "index_timelines_on_timelinename", unique: true
   end
 
+  create_table "user_blocks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "blocked_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_follows", force: :cascade do |t|
     t.integer "user_id"
     t.integer "followed_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_mutes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "muted_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
