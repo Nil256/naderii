@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   post "/users/@:username/follows" => "user_follows#create", as: "user_follows"
   delete "/users/@:username/follows" => "user_follows#destroy"
+  post "/users/@:username/mutes" => "user_mutes#create", as: "user_mutes"
+  delete "/users/@:username/mutes" => "user_mutes#destroy"
+  post "/users/@:username/blocks" => "user_blocks#create", as: "user_blocks"
+  delete "/users/@:username/blocks" => "user_blocks#destroy"
 
   get "/users/@:username/edit/dangerzone" => "users#dangeredit", as: "dangeredit_user"
   get "/users/@:username/edit" => "users#edit", as: "edit_user"
